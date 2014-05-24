@@ -17,7 +17,7 @@ public class ReaderDAO{
 		boolean flag = false;
 		//if(user.getUserID() == null)
 			//return false;
-		String str = "insert into Reader (rid,rname,rpw,sex,rdate,rintro,level,coin) values (?,?,?,?,?,?,?,?)";
+		String str = "insert into Reader (rid,rname,rpw,sex,rdate,rintro,rlevel,coin) values (?,?,?,?,?,?,?,?)";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, reader.getRid());
 		pst.setString(2, reader.getRname());
@@ -33,7 +33,7 @@ public class ReaderDAO{
 		return flag;
 		
 	}
-	public Reader select(int id)throws Exception{   //根据ID选择用户
+	public Reader select(int id)throws Exception{   
 		Reader reader = null;
 		String str = "select * from Reader where rid = ?";
 		pst = conn.prepareStatement(str);
@@ -46,24 +46,24 @@ public class ReaderDAO{
 		pst.close();
 		return reader;
 	}
-	/*public ArrayList<Users> select()throws Exception{   //选择所有的用户
-		ArrayList<Users> list=new ArrayList<Users>();
-		Users user = null;
-		String str = "select * from Users";
+	public ArrayList<Reader> select()throws Exception{   
+		ArrayList<Reader> list=new ArrayList<Reader>();
+		Reader reader = null;
+		String str = "select * from Reader";
 		pst = conn.prepareStatement(str);
 		ResultSet rset = pst.executeQuery();
 		while(rset.next()){
-			user = new Users(rset.getString("UserID"),rset.getString("UserName"),rset.getString("Sex"),rset.getString("Userpassword"),
-					rset.getString("Userdescription"),rset.getString("emailAddress"),rset.getInt("VIPLevel"),rset.getDouble("Balance"),rset.getInt("Reputation"));
-			list.add(user);
+			reader = new Reader(rset.getInt(1),rset.getString(2),rset.getString(3),rset.getString(4),
+					rset.getString(5),rset.getString(6),rset.getInt(7),rset.getInt(8));
+			list.add(reader);
 		}
 		pst.close();
 		return list;
-	}*/
+	}
 	
-	public boolean delete(int id)throws Exception{   //删除相对应的用户
+	public boolean delete(int id)throws Exception{   
 		boolean flag = false;
-		String str = "delete Reader where rid = ?";
+		String str = "delete from Reader where rid = ?";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, id);
 		if(pst.executeUpdate() > 0)
@@ -72,7 +72,7 @@ public class ReaderDAO{
 		return flag;
 	}
 	
-	public boolean modify(Reader reader)throws Exception{    //修改用户信息
+	public boolean modify(Reader reader)throws Exception{    
 		boolean flag = false;
 		int id = reader.getRid();
 		boolean m = delete(id);
@@ -96,17 +96,17 @@ public class ReaderDAO{
 		return flag;
 	}
 	
-	/*public boolean isExist(String id)throws Exception{    //判断用户是否存在
+	public boolean isExist(int rid)throws Exception{    //判断用户是否存在
 		boolean flag = false;
-		String str = "select * from Users where UserID = ?";
+		String str = "select * from Reader where rid = ?";
 		pst = conn.prepareStatement(str);
-		pst.setString(1, id);
+		pst.setInt(1, rid);
 		ResultSet rset = pst.executeQuery();
 		if(rset.next())
 			flag = true;
 		pst.close();
 		return flag;
-	}*/
+	}
 	
 	public boolean addCoin(Reader reader,int money)throws Exception{    //充值操作
 		boolean flag = false;
@@ -142,7 +142,7 @@ public class ReaderDAO{
 	
 	public boolean modifyLevel(Reader reader)throws Exception{   //修改用户等级
 		boolean flag = false;
-		String str = "update Reader set level = ? where rid = ?";
+		String str = "update Reader set rlevel = ? where rid = ?";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, reader.getLevel() + 1);
 		pst.setInt(2, reader.getRid());

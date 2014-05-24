@@ -5,16 +5,17 @@ public class Informing {
 	private int mid;
 	private int bid;
 	private String reason;
-	private String time;
-	private int type;
+	private String itime;
+	private int itype;			//type = 0举报     type = 1私信
+								//当类型是举报时，id是举报者的id，当类型是私信时，id是接收私信人的id
 	
 	public Informing(int id,int mid,int bid,String reason,String time,int type){
 		this.id = id;
 		this.mid = mid;
 		this.bid = bid;
 		this.reason = reason;
-		this.time = time;
-		this.type = type;
+		this.itime = time;
+		this.itype = type;
 	}
 	
 	public int getId() {
@@ -42,16 +43,16 @@ public class Informing {
 		this.reason = reason;
 	}
 	public String getTime() {
-		return time;
+		return itime;
 	}
 	public void setTime(String time) {
-		this.time = time;
+		this.itime = time;
 	}
 	public int getType() {
-		return type;
+		return itype;
 	}
 	public void setType(int type) {
-		this.type = type;
+		this.itype = type;
 	}
 	
 	

@@ -1,0 +1,116 @@
+#reg_img {
+	height: 590px;
+	background-image:url(../image/flower.png);
+	background-position:center;
+	background-repeat:no-repeat;
+}
+
+#reg_wel {
+	padding:10px;
+	font-size: 25px;
+	font-weight: 800;
+	color: #FF1493;
+}
+
+#reg_ins {
+	padding: 110px;
+	font-size: 25px;
+}
+
+#reg_button {
+	font-size: 20px;
+}
+
+.reg_field {
+	height: 25px;
+}
+
+.charge_field {
+	height: 28px;
+}
+
+#admin {
+	/*margin-right:0;*/
+	float: right;
+	font-size: 20px;
+	color: #FF1493;
+	font-weight: 800;
+}
+
+.message_title_field {
+	height: 23px;
+	width: 500px;
+	border-left: 0px;
+	border-top: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+}
+
+.message_field {
+	height: 300px;
+	width: 572px;
+	border-left: 0px;
+	border-top: 0px;
+	border-right: 0px;
+	border-bottom: 0px;
+}
+#message_button {
+	font-size: 20px;
+	margin: 430px auto;
+	/* padding-top: 450px; */
+}
+
+#report_button {
+	font-size: 20px;
+	margin: 470px auto;
+	/* padding-top: 450px; */
+}
+
+.menu {
+	width: 900px;
+	height: 34px;
+	color: #FF1493;
+}
+#menu {
+	position: relative;
+	z-index: 2;
+	width: 900px;
+	height: 55px;
+	margin: 0 auto;
+	text-align: center;
+	background-color: #F8B6DA;
+}
+	
+#menu a {
+	color: #FF1493;
+	text-decoration: none;
+}
+#menu ul {
+	float: left;
+	height: 34px;
+	margin-left: -20px;
+}
+
+#menu li {
+	float: left;
+	font-size: 25px;
+	line-height: 34px;
+	list-style-type: none;
+	padding: 0 50px;
+}
+
+
+/* tbody {
+	display: table-row-group;
+	vertical-align: middle;
+} */
+
+/* table {
+	white-space: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	font-style: normal;
+	color: -webkit-text;
+	text-align: start;
+} */

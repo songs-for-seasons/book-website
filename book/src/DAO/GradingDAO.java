@@ -26,7 +26,7 @@ public class GradingDAO {
 			return 3;
 	}
 	
-	public boolean insert(Grading g)throws Exception{   //增加一条消费记录
+	public boolean insert(Grading g)throws Exception{   
 		boolean flag = false;
 		/*int tag = isReader(sr.getId());
 		if(tag == 1){

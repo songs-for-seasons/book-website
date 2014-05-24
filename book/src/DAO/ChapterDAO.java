@@ -34,7 +34,7 @@ public class ChapterDAO{
 		return flag;
 		
 	}
-	public Chapter select(int bid,int cid)throws Exception{   //根据ID选择用户
+	public Chapter select(int bid,int cid)throws Exception{   
 		Chapter ch = null;
 		String str = "select * from Chapter where bid = ? and cid = ?";
 		pst = conn.prepareStatement(str);
@@ -48,7 +48,7 @@ public class ChapterDAO{
 		pst.close();
 		return ch;
 	}
-	public ArrayList<Chapter> selectlist(int bid)throws Exception{   //选择所有的用户
+	public ArrayList<Chapter> selectlist(int bid)throws Exception{   //查询某本书的所有章节
 		ArrayList<Chapter> list=new ArrayList<Chapter>();
 		Chapter c = null;
 		String str = "select * from Chapter where bid = ?";
@@ -64,7 +64,23 @@ public class ChapterDAO{
 		return list;
 	}
 	
-	public boolean delete(int bid,int cid)throws Exception{   //删除相对应的用户
+	public ArrayList<Chapter> selectlist()throws Exception{   //查询所有章节
+		ArrayList<Chapter> list=new ArrayList<Chapter>();
+		Chapter c = null;
+		String str = "select * from Chapter";
+		pst = conn.prepareStatement(str);
+		ResultSet rset = pst.executeQuery();
+		while(rset.next()){
+			System.out.println("rset!=null");
+			c = new Chapter(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getString(4),rset.getString(5),
+					rset.getInt(6),rset.getInt(7),rset.getInt(8),rset.getString(9));
+			list.add(c);
+		}
+		pst.close();
+		return list;
+	}
+	
+	public boolean delete(int bid,int cid)throws Exception{ 
 		boolean flag = false;
 		String str = "delete Chapter where bid = ? and cid = ?";
 		pst = conn.prepareStatement(str);
@@ -76,7 +92,7 @@ public class ChapterDAO{
 		return flag;
 	}
 	
-	public boolean modify(Chapter ch)throws Exception{    //修改用户信息
+	public boolean modify(Chapter ch)throws Exception{  
 		boolean flag = false;
 		int bid = ch.getBid();
 		int cid = ch.getCid();
@@ -104,7 +120,7 @@ public class ChapterDAO{
 		
 	}
 	
-	public ArrayList<Chapter> select(int bid)throws Exception{
+	/*public ArrayList<Chapter> select(int bid)throws Exception{
 		ArrayList<Chapter> list = new ArrayList<Chapter>();
 		Chapter ch = null;
 		String str = "select * from Chapter where bid = ?" ;
@@ -118,8 +134,25 @@ public class ChapterDAO{
 		}
 		pst.close();
 		return list;
-	}
+	}*/
 	
+	public int cost(int bid,int cid)throws Exception{
+		Chapter ch = null;
+		String str = "select * from Chapter where bid = ? and cid = ?";
+		pst = conn.prepareStatement(str);
+		pst.setInt(1, bid);
+		pst.setInt(2, cid);
+		ResultSet rset = pst.executeQuery();
+		if(rset.next()){
+			ch = new Chapter(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getString(4),rset.getString(5),
+					rset.getInt(6),rset.getInt(7),rset.getInt(8),rset.getString(9));
+		}
+		BooksDAO bdao = new BooksDAO();
+		Books b = bdao.select(bid);
+		int charge = b.getCost() * (ch.getWords() / 1000);
+		pst.close();
+		return charge;
+	}
 	
 }
 

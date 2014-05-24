@@ -7,7 +7,7 @@ public class Writer {
 	private String sex;
 	private String wdate;
 	private String wintro;
-	private int level;
+	private int wlevel;
 	private int coin;
 	private int wgrade;
 	
@@ -24,7 +24,7 @@ public class Writer {
 		this.sex = sex;
 		this.wdate = wdate;
 		this.wintro = wintro;
-		this.level = level;
+		this.wlevel = level;
 		this.coin = coin;
 		this.wgrade = wgrade;
 	}
@@ -78,11 +78,11 @@ public class Writer {
 	}
 
 	public int getLevel() {
-		return level;
+		return wlevel;
 	}
 
 	public void setLevel(int level) {
-		this.level = level;
+		this.wlevel = level;
 	}
 
 	public int getCoin() {

@@ -6,11 +6,11 @@ public class Reader {
 	private String sex;
 	private String rdate;
 	private String rintro;
-	private int level;
+	private int rlevel;
 	private int coin;
 	
 	public Reader(){
-		level = 0;
+		rlevel = 0;
 		coin = 0;
 	}
 	public Reader(int rid,String rname,String rpw,String sex,String rdate,
@@ -21,7 +21,7 @@ public class Reader {
 		this.sex = sex;
 		this.rdate = rdate;
 		this.rintro = rintro;
-		this.level = level;
+		this.rlevel = level;
 		this.coin = coin;
 	}
 	public int getRid() {
@@ -61,10 +61,10 @@ public class Reader {
 		this.rintro = rintro;
 	}
 	public int getLevel() {
-		return level;
+		return rlevel;
 	}
 	public void setLevel(int level) {
-		this.level = level;
+		this.rlevel = level;
 	}
 	public int getCoin() {
 		return coin;

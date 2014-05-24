@@ -63,12 +63,13 @@ public class ReaderDAO{
 	
 	public boolean delete(int id)throws Exception{   //删除相对应的用户
 		boolean flag = false;
-		String str = "delete Reader where rid = ?";
-		pst = conn.prepareStatement(str);
-		pst.setInt(1, id);
-		if(pst.executeUpdate() > 0)
+		String str = "delete from reader where rid = 1010";
+		//pst = conn.prepareStatement(str);
+		//pst.setInt(1, id);
+		//pst.executeUpdate(str);
+		//if(pst.executeUpdate() > 0)
 			flag = true;
-		pst.close();
+		//pst.close();
 		return flag;
 	}
 	
@@ -79,7 +80,7 @@ public class ReaderDAO{
 		boolean n = insert(reader);
 		if( m && n )
 			flag = true;
-		pst.close();
+		//pst.close();
 		return flag;
 	}
 	

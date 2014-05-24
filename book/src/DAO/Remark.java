@@ -5,7 +5,7 @@ public class Remark {
 	private int bid;
 	private int cid;
 	private String content;
-	private String time;
+	private String rtime;
 	private int wid;
 	private String recontent;
 	private String retime;
@@ -15,7 +15,7 @@ public class Remark {
 		this.bid = bid;
 		this.cid = cid;
 		this.content = content;
-		this.time = time;
+		this.rtime = time;
 		this.wid = wid;
 		this.recontent = recontent;
 		this.retime = retime;
@@ -54,11 +54,11 @@ public class Remark {
 	}
 
 	public String getTime() {
-		return time;
+		return rtime;
 	}
 
 	public void setTime(String time) {
-		this.time = time;
+		this.rtime = time;
 	}
 
 	public int getWid() {

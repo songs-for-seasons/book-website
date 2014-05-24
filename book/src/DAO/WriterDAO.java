@@ -17,7 +17,7 @@ public class WriterDAO{
 		boolean flag = false;
 		//if(user.getUserID() == null)
 			//return false;
-		String str = "insert into Writer (wid,wname,wpw,sex,wdate,wintro,level,coin,wgrade) values (?,?,?,?,?,?,?,?,?)";
+		String str = "insert into Writer (wid,wname,wpw,sex,wdate,wintro,wlevel,coin,wgrade) values (?,?,?,?,?,?,?,?,?)";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, writer.getWid());
 		pst.setString(2, writer.getWname());
@@ -34,7 +34,7 @@ public class WriterDAO{
 		return flag;
 		
 	}
-	public Writer select(int id)throws Exception{   //根据ID选择用户
+	public Writer select(int id)throws Exception{   
 		Writer writer = null;
 		String str = "select * from Writer where wid = ?";
 		pst = conn.prepareStatement(str);
@@ -47,22 +47,22 @@ public class WriterDAO{
 		pst.close();
 		return writer;
 	}
-	/*public ArrayList<Users> select()throws Exception{   //选择所有的用户
-		ArrayList<Users> list=new ArrayList<Users>();
-		Users user = null;
-		String str = "select * from Users";
+	public ArrayList<Writer> select()throws Exception{   
+		ArrayList<Writer> list=new ArrayList<Writer>();
+		Writer writer = null;
+		String str = "select * from Writer";
 		pst = conn.prepareStatement(str);
 		ResultSet rset = pst.executeQuery();
 		while(rset.next()){
-			user = new Users(rset.getString("UserID"),rset.getString("UserName"),rset.getString("Sex"),rset.getString("Userpassword"),
-					rset.getString("Userdescription"),rset.getString("emailAddress"),rset.getInt("VIPLevel"),rset.getDouble("Balance"),rset.getInt("Reputation"));
-			list.add(user);
+			writer = new Writer(rset.getInt(1),rset.getString(2),rset.getString(3),rset.getString(4),
+					rset.getString(5),rset.getString(6),rset.getInt(7),rset.getInt(8),rset.getInt(9));
+			list.add(writer);
 		}
 		pst.close();
 		return list;
-	}*/
+	}
 	
-	public boolean delete(int id)throws Exception{   //删除相对应的用户
+	public boolean delete(int id)throws Exception{   
 		boolean flag = false;
 		String str = "delete Writer where wid = ?";
 		pst = conn.prepareStatement(str);
@@ -73,7 +73,7 @@ public class WriterDAO{
 		return flag;
 	}
 	
-	public boolean modify(Writer writer)throws Exception{    //修改用户信息
+	public boolean modify(Writer writer)throws Exception{    
 		boolean flag = false;
 		int id = writer.getWid();
 		boolean m = delete(id);
@@ -97,17 +97,17 @@ public class WriterDAO{
 		return flag;
 	}
 	
-	/*public boolean isExist(String id)throws Exception{    //判断用户是否存在
+	public boolean isExist(int wid)throws Exception{    //判断用户是否存在
 		boolean flag = false;
-		String str = "select * from Users where UserID = ?";
+		String str = "select * from Writer where wid = ?";
 		pst = conn.prepareStatement(str);
-		pst.setString(1, id);
+		pst.setInt(1, wid);
 		ResultSet rset = pst.executeQuery();
 		if(rset.next())
 			flag = true;
 		pst.close();
 		return flag;
-	}*/
+	}
 	
 	public boolean addCoin(Writer writer,int money)throws Exception{    //充值操作
 		boolean flag = false;
@@ -143,7 +143,7 @@ public class WriterDAO{
 	
 	public boolean modifyLevel(Writer writer)throws Exception{   //修改用户等级
 		boolean flag = false;
-		String str = "update Writer set level = ? where wid = ?";
+		String str = "update Writer set wlevel = ? where wid = ?";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, writer.getLevel() + 1);
 		pst.setInt(2, writer.getWid());
@@ -164,7 +164,34 @@ public class WriterDAO{
 		pst.close();
 		return flag;
 	}*/
+
+	public ArrayList<Writer> top(int num)throws Exception{
+		WriterDAO b= new WriterDAO();
+		ArrayList<Writer> list=b.select();
+		int[] grade=new int[list.size()];
+		for(int i=0;i<list.size();i++)
+			grade[i]=i;
+		for(int i=0;i<list.size()-1;i++)
+		{
+			int mg=list.get(i).getWgrade();
+			int mid=i;
+			for(int j=i+1;j<list.size();j++)
+			{
+				if(list.get(mid).getWgrade()<list.get(j).getWgrade())
+				{
+					mid=j;
+					mg=list.get(mid).getWgrade();
+				}
+			}
+			grade[i]=mid;
+		}
+		ArrayList<Writer> list2=new ArrayList<Writer>();
+		for(int i=0;i<num;i++)
+			list2.add(b.select(grade[i]));
+		return list;
 	
+}
+
 }
 
 

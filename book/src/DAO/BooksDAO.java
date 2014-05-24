@@ -38,7 +38,7 @@ public class BooksDAO{
 		return flag;
 		
 	}
-	public Books select(int id)throws Exception{   //根据ID选择用户
+	public Books select(int id)throws Exception{   //根据ID选择书籍
 		Books book = null;
 		String str = "select * from Books where bid = ?";
 		pst = conn.prepareStatement(str);
@@ -51,7 +51,7 @@ public class BooksDAO{
 		pst.close();
 		return book;
 	}
-	public ArrayList<Books> select(String name)throws Exception{   //根据ID选择用户
+	public ArrayList<Books> select(String name)throws Exception{  //根据书名查询
 		ArrayList<Books> list=new ArrayList<Books>();
 		Books book = null;
 		String str = "select * from Books where name = ?";
@@ -66,22 +66,37 @@ public class BooksDAO{
 		pst.close();
 		return list;
 	}
-	/*public ArrayList<Users> select()throws Exception{   //选择所有的用户
-		ArrayList<Users> list=new ArrayList<Users>();
-		Users user = null;
-		String str = "select * from Users";
+	public ArrayList<Books> selectid(int id)throws Exception{  //根据作家id查询
+		ArrayList<Books> list=new ArrayList<Books>();
+		Books book = null;
+		String str = "select * from Books where wid = ?";
 		pst = conn.prepareStatement(str);
+		pst.setInt(1, id);
 		ResultSet rset = pst.executeQuery();
-		while(rset.next()){
-			user = new Users(rset.getString("UserID"),rset.getString("UserName"),rset.getString("Sex"),rset.getString("Userpassword"),
-					rset.getString("Userdescription"),rset.getString("emailAddress"),rset.getInt("VIPLevel"),rset.getDouble("Balance"),rset.getInt("Reputation"));
-			list.add(user);
+		if(rset.next()){
+			book = new Books(rset.getInt(1),rset.getInt(2),rset.getString(3),rset.getString(4),rset.getInt(5),
+					rset.getInt(6),rset.getInt(7),rset.getInt(8),rset.getInt(9),rset.getInt(10),rset.getInt(11),rset.getInt(12));
+			list.add(book);
 		}
 		pst.close();
 		return list;
-	}*/
+	}
+	public ArrayList<Books> select()throws Exception{   //查询所有的书籍
+		ArrayList<Books> list=new ArrayList<Books>();
+		Books book = null;
+		String str = "select * from Books";
+		pst = conn.prepareStatement(str);
+		ResultSet rset = pst.executeQuery();
+		while(rset.next()){
+			book = new Books(rset.getInt(1),rset.getInt(2),rset.getString(3),rset.getString(4),rset.getInt(5),
+					rset.getInt(6),rset.getInt(7),rset.getInt(8),rset.getInt(9),rset.getInt(10),rset.getInt(11),rset.getInt(12));
+			list.add(book);
+		}
+		pst.close();
+		return list;
+	}
 	
-	public boolean delete(int id)throws Exception{   //删除相对应的用户
+	public boolean delete(int id)throws Exception{   //删除相对应的书籍
 		boolean flag = false;
 		String str = "delete Books where bid = ?";
 		pst = conn.prepareStatement(str);
@@ -92,7 +107,7 @@ public class BooksDAO{
 		return flag;
 	}
 	
-	public boolean modify(Books book)throws Exception{    //修改用户信息
+	public boolean modify(Books book)throws Exception{    
 		boolean flag = false;
 		int id = book.getBid();
 		boolean m = delete(id);
@@ -105,13 +120,51 @@ public class BooksDAO{
 	
 	public int countwords(int bid)throws Exception{
 		ChapterDAO chdao = new ChapterDAO();
-		ArrayList<Chapter> list = chdao.select(bid);
+		ArrayList<Chapter> list = chdao.selectlist(bid);
 		int num = 0;
 		for(int i = 0;i < list.size();i++)
 			num += chdao.countwords(bid, list.get(i).getCid());
 		return num;
 	}
 	
+	public boolean isExist(int bid)throws Exception{    //判断书是否存在
+		boolean flag = false;
+		String str = "select * from Books where bid = ?";
+		pst = conn.prepareStatement(str);
+		pst.setInt(1, bid);
+		ResultSet rset = pst.executeQuery();
+		if(rset.next())
+			flag = true;
+		pst.close();
+		return flag;
+	}
+	
+	public ArrayList<Books> top(int num)throws Exception{
+		BooksDAO b= new BooksDAO();
+		ArrayList<Books> list=b.select();
+		int[] grade=new int[list.size()];
+		for(int i=0;i<list.size();i++)
+			grade[i]=i;
+		for(int i=0;i<list.size()-1;i++)
+		{
+			int mg=list.get(i).getBgrade();
+			int mid=i;
+			for(int j=i+1;j<list.size();j++)
+			{
+				if(list.get(mid).getBgrade()<list.get(j).getBgrade())
+				{
+					mid=j;
+					mg=list.get(mid).getBgrade();
+				}
+			}
+			grade[i]=mid;
+		}
+		ArrayList<Books> list2=new ArrayList<Books>();
+		for(int i=0;i<num;i++)
+			list2.add(b.select(grade[i]));
+		return list;
+	}
+
 	
 }
 

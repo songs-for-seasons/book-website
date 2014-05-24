@@ -13,7 +13,7 @@ public class InformingDAO {
 	}
 	
 	
-	public boolean insert(Informing in)throws Exception{   //增加一条消费记录
+	public boolean insert(Informing in)throws Exception{   //增加一条举报/私信记录
 		boolean flag = false;
 		/*int tag = isReader(sr.getId());
 		if(tag == 1){
@@ -22,7 +22,7 @@ public class InformingDAO {
 		UsersDAO udao = new UsersDAO();*/
 		//if(udao.select(sr.getUserID()) == null)
 			//return false;
-		String str = "insert into Informing (id,mid,bid,reason,time,type) values (?,?,?,?,?,?)";
+		String str = "insert into Informing (id,mid,bid,reason,itime,itype) values (?,?,?,?,?,?)";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, in.getId());
 		pst.setInt(2, in.getMid());
@@ -44,12 +44,23 @@ public class InformingDAO {
 		ResultSet rset = pst.executeQuery();
 		while(rset.next()){
 			in = new Informing(rset.getInt("id"),rset.getInt("mid"),rset.getInt("bid"),rset.getString("reason"),
-					rset.getString("time"),rset.getInt("type"));
+					rset.getString("itime"),rset.getInt("itype"));
 			list.add(in);
 		}
 		pst.close();
 		return list.size();
 	}
 	
+	public boolean isExist(int mid)throws Exception{    //判断消息是否存在
+		boolean flag = false;
+		String str = "select * from Informing where mid = ?";
+		pst = conn.prepareStatement(str);
+		pst.setInt(1, mid);
+		ResultSet rset = pst.executeQuery();
+		if(rset.next())
+			flag = true;
+		pst.close();
+		return flag;
+	}
 }
 
