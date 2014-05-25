@@ -62,25 +62,28 @@ public class RemarkDAO{
 		pst.close();
 		return re;
 	}
-	public ArrayList<Remark> select(int bid)throws Exception{  
+	public ArrayList<Remark> selectlist(int bid)throws Exception{  
+		System.out.println(bid);
 		ArrayList<Remark> list=new ArrayList<Remark>();
 		Remark re = null;
 		String str = "select * from Remark where bid = ?";
-		pst.setInt(1, bid);
 		pst = conn.prepareStatement(str);
+		pst.setInt(1, bid);
 		ResultSet rset = pst.executeQuery();
 		while(rset.next()){
+			System.out.println("3333333333333");
 			re = new Remark(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getString(4),
 					rset.getString(5),rset.getInt(6),rset.getString(7),rset.getString(8));
 			list.add(re);
 		}
 		pst.close();
+		System.out.println(list.size());
 		return list;
 	}
 	
 	public boolean delete(int id,int bid,int cid,String time)throws Exception{   
 		boolean flag = false;
-		String str = "delete Remark where rid = ? and bid = ? and cid = ? and rtime = ?";
+		String str = "delete from Remark where rid = ? and bid = ? and cid = ? and rtime = ?";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, id);
 		pst.setInt(2, bid);
@@ -98,7 +101,7 @@ public class RemarkDAO{
 		boolean n = insert(re);
 		if( m && n )
 			flag = true;
-		pst.close();
+		//pst.close();
 		return flag;
 	}
 	

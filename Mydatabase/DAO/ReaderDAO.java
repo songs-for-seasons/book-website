@@ -63,7 +63,7 @@ public class ReaderDAO{
 	
 	public boolean delete(int id)throws Exception{   
 		boolean flag = false;
-		String str = "delete Reader where rid = ?";
+		String str = "delete from Reader where rid = ?";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, id);
 		if(pst.executeUpdate() > 0)
@@ -79,7 +79,7 @@ public class ReaderDAO{
 		boolean n = insert(reader);
 		if( m && n )
 			flag = true;
-		pst.close();
+		//pst.close();
 		return flag;
 	}
 	

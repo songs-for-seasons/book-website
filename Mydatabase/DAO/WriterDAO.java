@@ -64,7 +64,7 @@ public class WriterDAO{
 	
 	public boolean delete(int id)throws Exception{   
 		boolean flag = false;
-		String str = "delete Writer where wid = ?";
+		String str = "delete from Writer where wid = ?";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, id);
 		if(pst.executeUpdate() > 0)
@@ -80,7 +80,7 @@ public class WriterDAO{
 		boolean n = insert(writer);
 		if( m && n )
 			flag = true;
-		pst.close();
+		//pst.close();
 		return flag;
 	}
 	

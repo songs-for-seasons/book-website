@@ -47,19 +47,30 @@ public class NewChapter extends HttpServlet{
 			Chapter c = new Chapter(list.size()+1,uid,bid,ctitle,content,content.length(),0,0,time);
 			cdao.insert(c);
 			WriterDAO wdao = new WriterDAO();
-			Writer w = wdao.select(uid);
-			request.getSession().setAttribute("userid",w.getWid());
-			request.getSession().setAttribute("username",w.getWname());
-			BooksDAO bdao = new BooksDAO();
-			Books b = bdao.select(bid);
+			//Writer w = wdao.select(uid);
+			//request.getSession().setAttribute("userid",w.getWid());
+			//request.getSession().setAttribute("username",w.getWname());
+			//BooksDAO bdao = new BooksDAO();
+			//Books b = bdao.select(bid);
 			
-			Chapter c1 = cdao.select(bid, cid);
-			request.getSession().setAttribute("bid",b.getBid());
+			//Chapter c1 = cdao.select(bid, list.size()+1);
+			/*request.getSession().setAttribute("bid",b.getBid());
 			request.getSession().setAttribute("bname",b.getBname());
 			request.getSession().setAttribute("cid",c1.getCid());
 			request.getSession().setAttribute("ctitle",c1.getTitle());
 			request.getSession().setAttribute("content",c1.getContent());
-			response.sendRedirect("chapterpage.jsp");    //跳转到reader页面
+			response.sendRedirect("chapterpage.jsp");    //跳转到reader页面*/
+			Writer w = wdao.select(uid);
+			request.getSession().setAttribute("userid",w.getWid());
+			request.getSession().setAttribute("username",w.getWname());
+			request.getSession().setAttribute("sex",w.getSex());
+			request.getSession().setAttribute("level",w.getLevel());
+			request.getSession().setAttribute("type",1);
+			request.getSession().setAttribute("birthday",w.getWdate());
+			request.getSession().setAttribute("intro",w.getWintro());
+			request.getSession().setAttribute("password",w.getWpw());
+			request.getSession().setAttribute("balance",w.getCoin());
+			response.sendRedirect("writerpage.jsp");    //跳转到writer页面
 			
 		}
 		catch(Exception e){

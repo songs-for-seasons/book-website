@@ -51,14 +51,14 @@ public class BooksDAO{
 		pst.close();
 		return book;
 	}
-	public ArrayList<Books> select(String name)throws Exception{  //根据书名查询
+	public ArrayList<Books> select1(String name)throws Exception{  //根据书名查询
 		ArrayList<Books> list=new ArrayList<Books>();
 		Books book = null;
 		String str = "select * from Books where name = ?";
 		pst = conn.prepareStatement(str);
 		pst.setString(1, name);
 		ResultSet rset = pst.executeQuery();
-		if(rset.next()){
+		while(rset.next()){
 			book = new Books(rset.getInt(1),rset.getInt(2),rset.getString(3),rset.getString(4),rset.getInt(5),
 					rset.getInt(6),rset.getInt(7),rset.getInt(8),rset.getInt(9),rset.getInt(10),rset.getInt(11),rset.getInt(12));
 			list.add(book);
@@ -73,15 +73,17 @@ public class BooksDAO{
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, id);
 		ResultSet rset = pst.executeQuery();
-		if(rset.next()){
+		while(rset.next()){
 			book = new Books(rset.getInt(1),rset.getInt(2),rset.getString(3),rset.getString(4),rset.getInt(5),
 					rset.getInt(6),rset.getInt(7),rset.getInt(8),rset.getInt(9),rset.getInt(10),rset.getInt(11),rset.getInt(12));
 			list.add(book);
 		}
+		System.out.println("select");
+		System.out.println(list.size());
 		pst.close();
 		return list;
 	}
-	public ArrayList<Books> select()throws Exception{   //查询所有的书籍
+	public ArrayList<Books> select2()throws Exception{   //查询所有的书籍
 		ArrayList<Books> list=new ArrayList<Books>();
 		Books book = null;
 		String str = "select * from Books";
@@ -98,7 +100,7 @@ public class BooksDAO{
 	
 	public boolean delete(int id)throws Exception{   //删除相对应的书籍
 		boolean flag = false;
-		String str = "delete Books where bid = ?";
+		String str = "delete from Books where bid = ?";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, id);
 		if(pst.executeUpdate() > 0)
@@ -114,13 +116,13 @@ public class BooksDAO{
 		boolean n = insert(book);
 		if( m && n )
 			flag = true;
-		pst.close();
+		//pst.close();
 		return flag;
 	}
 	
 	public int countwords(int bid)throws Exception{
 		ChapterDAO chdao = new ChapterDAO();
-		ArrayList<Chapter> list = chdao.select(bid);
+		ArrayList<Chapter> list = chdao.selectlist(bid);
 		int num = 0;
 		for(int i = 0;i < list.size();i++)
 			num += chdao.countwords(bid, list.get(i).getCid());
@@ -141,7 +143,7 @@ public class BooksDAO{
 	
 	public ArrayList<Books> top(int num)throws Exception{
 		BooksDAO b= new BooksDAO();
-		ArrayList<Books> list=b.select();
+		ArrayList<Books> list=b.select2();
 		int[] grade=new int[list.size()];
 		for(int i=0;i<list.size();i++)
 			grade[i]=i;

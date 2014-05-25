@@ -1,5 +1,6 @@
 package Servlet;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import java.io.*;
@@ -80,6 +81,10 @@ public class Report extends HttpServlet {
 			}
 			BooksDAO bdao = new BooksDAO();
 			Books b = bdao.select(bid);
+			int inform = b.getInform() + 1;
+			b.setInform(inform);
+			bdao.modify(b);
+			b = bdao.select(bid);
 			ChapterDAO cdao = new ChapterDAO();
 			Chapter c = cdao.select(bid, cid);
 			WriterDAO wdao = new WriterDAO();
@@ -92,14 +97,26 @@ public class Report extends HttpServlet {
 			}
 			Informing in = new Informing(uid,messageid,bid,content,time,0);
 			indao.insert(in);
-			request.getSession().setAttribute("wid",b.getWid());
+			/*request.getSession().setAttribute("wid",b.getWid());
 			request.getSession().setAttribute("wname",w.getWname());
 			request.getSession().setAttribute("bid",b.getBid());
 			request.getSession().setAttribute("bname",b.getBname());
 			request.getSession().setAttribute("cid",c.getCid());
 			request.getSession().setAttribute("ctitle",c.getTitle());
 			request.getSession().setAttribute("content",c.getContent());
-			response.sendRedirect("chapterpage.jsp");    //跳转到reader页面
+			response.sendRedirect("chapterpage.jsp");    //跳转到reader页面*/
+			request.getSession().setAttribute("bid",b.getBid());
+			request.getSession().setAttribute("bname",b.getBname());
+			request.getSession().setAttribute("wid",b.getWid());
+			request.getSession().setAttribute("wname",w.getWname());
+			request.getSession().setAttribute("bintro",b.getBintro());
+			request.getSession().setAttribute("bword",b.getWords());
+			request.getSession().setAttribute("state",b.getIsfinished());
+			request.getSession().setAttribute("grade",b.getBgrade());
+			request.getSession().setAttribute("cnum",b.getRemark());
+			request.getSession().setAttribute("type",b.getType());
+			//request.getSession().setAttribute("time",c.getUpdatetime());
+			response.sendRedirect("bhomepage.jsp");   
 			
 		}
 		catch(Exception e){

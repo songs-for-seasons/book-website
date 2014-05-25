@@ -48,7 +48,8 @@ public class ChapterDAO{
 		pst.close();
 		return ch;
 	}
-	public ArrayList<Chapter> selectlist(int bid)throws Exception{   //查询某本书的所有章节
+	public ArrayList<Chapter> selectlist(int bid)throws Exception{ //查询某本书的所有章节
+		System.out.println(bid);
 		ArrayList<Chapter> list=new ArrayList<Chapter>();
 		Chapter c = null;
 		String str = "select * from Chapter where bid = ?";
@@ -56,21 +57,24 @@ public class ChapterDAO{
 		pst.setInt(1, bid);
 		ResultSet rset = pst.executeQuery();
 		while(rset.next()){
+			System.out.println("3333333333333");
 			c = new Chapter(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getString(4),rset.getString(5),
 					rset.getInt(6),rset.getInt(7),rset.getInt(8),rset.getString(9));
 			list.add(c);
 		}
 		pst.close();
+		System.out.println(list.size());
 		return list;
 	}
 	
-	public ArrayList<Chapter> selectlist()throws Exception{   //查询所有章节
+	public ArrayList<Chapter> selectlist1()throws Exception{   //查询所有章节
 		ArrayList<Chapter> list=new ArrayList<Chapter>();
 		Chapter c = null;
 		String str = "select * from Chapter";
 		pst = conn.prepareStatement(str);
 		ResultSet rset = pst.executeQuery();
 		while(rset.next()){
+			System.out.println("rset!=null");
 			c = new Chapter(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getString(4),rset.getString(5),
 					rset.getInt(6),rset.getInt(7),rset.getInt(8),rset.getString(9));
 			list.add(c);
@@ -81,7 +85,7 @@ public class ChapterDAO{
 	
 	public boolean delete(int bid,int cid)throws Exception{ 
 		boolean flag = false;
-		String str = "delete Chapter where bid = ? and cid = ?";
+		String str = "delete from Chapter where bid = ? and cid = ?";
 		pst = conn.prepareStatement(str);
 		pst.setInt(1, bid);
 		pst.setInt(2, cid);
@@ -99,7 +103,7 @@ public class ChapterDAO{
 		boolean n = insert(ch);
 		if( m && n )
 			flag = true;
-		pst.close();
+		//pst.close();
 		return flag;
 	}
 	

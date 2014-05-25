@@ -66,11 +66,6 @@ public class PersonalPage extends HttpServlet{
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		
-			
-		
-		
-		
 	}
 	public void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 		doPost(request,response);

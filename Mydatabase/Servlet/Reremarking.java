@@ -36,7 +36,6 @@ public class Reremarking extends HttpServlet{
 		int cid = Integer.parseInt(request.getParameter("cid").trim());
 		String remarktime = request.getParameter("time");
 		String content = request.getParameter("recontent");
-		content = content.replace("\n", "<br>");
 		Date date= new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		//String parse = dateFormat.format(date);

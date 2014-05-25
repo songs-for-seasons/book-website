@@ -35,7 +35,7 @@ public class Remarking extends HttpServlet{
 		int cid = Integer.parseInt(request.getParameter("cid").trim());
 		int grade = Integer.parseInt(request.getParameter("grade").trim());
 		String content = request.getParameter("content");
-		content = content.replace("\n", "<br>");
+		//content = content.replace("\n", "<br>");
 		Date date= new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		//String parse = dateFormat.format(date);
@@ -65,10 +65,20 @@ public class Remarking extends HttpServlet{
 				request.getSession().setAttribute("username",w.getWname());
 				
 			}
+			int gr = 0;
 			BooksDAO bdao = new BooksDAO();
 			Books b = bdao.select(bid);
+			gr = b.getBgrade() + grade;
+			b.setBgrade(gr);
+			b.setRemark(b.getRemark()+1);
+			bdao.modify(b);
+			b = bdao.select(bid);
 			ChapterDAO cdao = new ChapterDAO();
 			Chapter c = cdao.select(bid, cid);
+			gr = c.getCgrade() + grade;
+			c.setCgrade(gr);
+			cdao.modify(c);
+			c = cdao.select(bid, cid);
 			request.getSession().setAttribute("bid",b.getBid());
 			request.getSession().setAttribute("bname",b.getBname());
 			request.getSession().setAttribute("cid",c.getCid());

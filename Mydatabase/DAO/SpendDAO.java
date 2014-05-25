@@ -33,12 +33,12 @@ public class SpendDAO {
 		pst.close();
 		return flag;
 	}
-	public ArrayList<Spend> select(String id)throws Exception{    //根据ID返回相应的消费记录
+	public ArrayList<Spend> select(int id)throws Exception{    //根据ID返回相应的消费记录
 		ArrayList<Spend> list = new ArrayList<Spend>();
 		Spend sr = null;
 		String str = "select * from Spend where id = ?" ;
 		pst = conn.prepareStatement(str);
-		pst.setString(1, id);
+		pst.setInt(1, id);
 		ResultSet rset = pst.executeQuery();
 		while(rset.next()){
 			sr = new Spend(rset.getInt("id"),rset.getInt("bid"),rset.getInt("cid"),rset.getInt("cost"));
@@ -64,21 +64,43 @@ public class SpendDAO {
 		return tag;
 	}
 	
-	public ArrayList<Chapter> bookhouse(int id)throws Exception{   //显示书屋
+	public ArrayList<Books> bookhouse(int id)throws Exception{   //显示书屋
 		ArrayList<Chapter> list=new ArrayList<Chapter>();
 		ArrayList<Chapter> list1=new ArrayList<Chapter>();
+		ArrayList<Books> list2=new ArrayList<Books>();
 		Chapter ch = null;
 		ChapterDAO cdao = new ChapterDAO();
-		list = cdao.selectlist();
-		int tag = 0;
-		for(int i=0;i<list.size();i++){
-			tag = isPurchase(id,list.get(i).getBid(),list.get(i).getCid());
-			if(tag == 1)
-				list1.add(list.get(i));
+		BooksDAO bdao = new BooksDAO();
+		list = cdao.selectlist1();
+		if(list.size()==0) {
+			System.out.println("list == null");
+			//pst.close();
+			return null;
 		}
-		
-		pst.close();
-		return list1;
+			
+		else{
+			//System.out.println("list != null");
+			int tag = 0;
+			for(int i=0;i<list.size();i++){
+				tag = isPurchase(id,list.get(i).getBid(),list.get(i).getCid());
+				if(tag == 1)
+					list1.add(list.get(i));
+			}
+			for(int i=0;i<list1.size();i++){
+				Books b = bdao.select(list2.get(i).getBid());
+				int flag = 0;
+				for(int j=0;j<list2.size();j++){
+					if(b.getBid() == list2.get(j).getBid()){
+						flag = 1;
+						break;
+					}
+				}
+				if(flag == 0)
+					list2.add(b);
+			}
+			//pst.close();
+			return list2;
+		}
 	}
 }
 

@@ -62,5 +62,19 @@ public class InformingDAO {
 		pst.close();
 		return flag;
 	}
+	public int isInform(int id,int bid)throws Exception{  //ÅÐ¶ÏÊÇ·ñ¹ºÂò¹ýÕÂ½Ú
+		int tag = 0;
+		Informing in = null;
+		String str = "select * from Informing where id = ? and bid = ?";
+		pst = conn.prepareStatement(str);
+		pst.setInt(1, id);
+		pst.setInt(2, bid);
+		ResultSet rset = pst.executeQuery();
+		if(rset.next()){
+			tag = 1;
+		}
+		pst.close();
+		return tag;
+	}
 }
 
