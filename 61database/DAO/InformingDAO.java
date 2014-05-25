@@ -67,6 +67,22 @@ public class InformingDAO {
 		return list;
 	}
 	
+	public ArrayList<Informing> selectid()throws Exception{  //根据作家id查询
+		ArrayList<Informing> list=new ArrayList<Informing>();
+		Informing inform = null;
+		String str = "select * from Informing";
+		pst = conn.prepareStatement(str);
+		
+		ResultSet rset = pst.executeQuery();
+		if(rset.next()){
+			inform = new Informing(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getString(4),rset.getString(5),
+					rset.getInt(6));
+			list.add(inform);
+		}
+		pst.close();
+		return list;
+	}
+	
 	public int count(int bid)throws Exception{
 		ArrayList<Informing> list = new ArrayList<Informing>();
 		Informing in = null;

@@ -22,8 +22,7 @@ public class SendNotice extends HttpServlet {
 			e.printStackTrace();
 		}	
 		
+		response.sendRedirect("send_notice_succ.jsp");    //无需输出，弹出警示框
 		
-		
-        response.sendRedirect("send_notice.jsp");    //无需输出，弹出警示框
 	}
 }

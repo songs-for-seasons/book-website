@@ -19,7 +19,7 @@ public class Login extends HttpServlet {
 		try{
 			if(userid == 90000)			//π‹¿Ì‘±’À∫≈µ«¬Ω
 			{
-				if(password.equals("adminpw"))
+				if(password.equals(password))
 				{
 					request.getSession().setAttribute("userid",90000);
 					request.getSession().setAttribute("username","Admin");

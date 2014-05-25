@@ -14,11 +14,13 @@ public class Register extends HttpServlet {
         String password;
         String password_check;
         String type;
+        String user;
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     	String  today = sDateFormat.format(new java.util.Date());
         username = request.getParameter("username");	//读取姓名
         password = request.getParameter("password");	//读取密码
         password_check = request.getParameter("password_check");	//读取再次输入的密码
+        user = request.getParameter("type");	
         if(!password.equals(password_check))
         {
         	response.setContentType("text/html");
@@ -28,7 +30,7 @@ public class Register extends HttpServlet {
         	out.println("</body></html>");
         }
         	
-        else if(true)		//按钮是读者
+        else if(user.equals("reader"))		//按钮是读者
         {
         	try{
         		ReaderDAO r = new ReaderDAO();
@@ -47,10 +49,10 @@ public class Register extends HttpServlet {
 				if(flag == true)
 				{
 					type = "读者";
-					request.getSession().setAttribute("readerid",reader.getRid());
-					request.getSession().setAttribute("readername",reader.getRname());
-					request.getSession().setAttribute("readerpassword", reader.getRpw());
-					request.getSession().setAttribute("type", type);
+					request.getSession().setAttribute("userid",reader.getRid());
+					request.getSession().setAttribute("username",reader.getRname());
+//					request.getSession().setAttribute("readerpassword", reader.getRpw());
+//					request.getSession().setAttribute("type", type);
 					response.sendRedirect("homepage.jsp");
 				}
 				else
@@ -67,7 +69,7 @@ public class Register extends HttpServlet {
 				e.printStackTrace();
 			}
 	    }
-        else if(false)		//按钮是作者
+        else if(user.equals("writer"))		//按钮是作者
         {
         	try{
         		WriterDAO w = new WriterDAO();
@@ -86,10 +88,10 @@ public class Register extends HttpServlet {
 				if(flag == true)
 				{
 					type = "作家";
-					request.getSession().setAttribute("writerid",writer.getWid());
-					request.getSession().setAttribute("writername",writer.getWname());
-					request.getSession().setAttribute("writerpassword", writer.getWpw());
-					request.getSession().setAttribute("type", type);
+					request.getSession().setAttribute("userid",writer.getWid());
+					request.getSession().setAttribute("username",writer.getWname());
+//					request.getSession().setAttribute("writerpassword", writer.getWpw());
+//					request.getSession().setAttribute("type", type);
 					response.sendRedirect("homepage.jsp");
 				}
 				else
