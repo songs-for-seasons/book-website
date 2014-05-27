@@ -53,7 +53,7 @@ public class NewBook extends HttpServlet{
 			Writer w = wdao.select(uid);
 			request.getSession().setAttribute("userid",w.getWid());
 			request.getSession().setAttribute("username",w.getWname());	
-			Books b1 = bdao.select(booknum+1);
+			Books b1 = bdao.select(booknum);
 			request.getSession().setAttribute("bid",b1.getBid());
 			request.getSession().setAttribute("bname",b1.getBname());
 			request.getSession().setAttribute("wid",b1.getWid());

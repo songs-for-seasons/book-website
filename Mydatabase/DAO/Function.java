@@ -163,5 +163,29 @@ public class Function {
 		wlist = w.select();			//获取所有作者
 		return wlist;
 	}
+	
+	static public ArrayList<Books> getBooksList() throws Exception{
+		BooksDAO b = new BooksDAO();
+		ArrayList<Books> blist=new ArrayList<Books>();
+		blist = b.select2();			//获取所有book
+		return blist;
+	}
+	
+	static public ArrayList<Informing> getInformingList() throws Exception{
+		InformingDAO i = new InformingDAO();
+		ArrayList<Informing> ilist=new ArrayList<Informing>();
+		ilist = i.select2();			//获取所有informing
+		return ilist;
+	}
+	
+	static public String getTitle(String content) {
+		String strArray[] = content.split("^");
+		return strArray[0];
+	}
+	
+	static public String getContent(String content) {
+		String strArray[] = content.split("^");
+		return strArray[1];
+	}
 
 }

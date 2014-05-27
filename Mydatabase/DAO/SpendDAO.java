@@ -87,7 +87,7 @@ public class SpendDAO {
 					list1.add(list.get(i));
 			}
 			for(int i=0;i<list1.size();i++){
-				Books b = bdao.select(list2.get(i).getBid());
+				Books b = bdao.select(list1.get(i).getBid());
 				int flag = 0;
 				for(int j=0;j<list2.size();j++){
 					if(b.getBid() == list2.get(j).getBid()){

@@ -62,7 +62,7 @@ public class InformingDAO {
 		pst.close();
 		return flag;
 	}
-	public int isInform(int id,int bid)throws Exception{  //判断是否购买过章节
+	public int isInform(int id,int bid)throws Exception{  //判断是否举报过
 		int tag = 0;
 		Informing in = null;
 		String str = "select * from Informing where id = ? and bid = ?";
@@ -75,6 +75,49 @@ public class InformingDAO {
 		}
 		pst.close();
 		return tag;
+	}
+	public Informing select(int mid)throws Exception{   //根据mid选择信息
+		Informing inform = null;
+		String str = "select * from Informing where mid = ?";
+		pst = conn.prepareStatement(str);
+		pst.setInt(1, mid);
+		ResultSet rset = pst.executeQuery();
+		if(rset.next()){
+			inform = new Informing(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getString(4),rset.getString(5),
+					rset.getInt(6));
+		}
+		pst.close();
+		return inform;
+	}
+	public ArrayList<Informing> selectid(int id)throws Exception{  //根据作品id查询
+		ArrayList<Informing> list=new ArrayList<Informing>();
+		Informing inform = null;
+		String str = "select * from Informing where wid = ?";
+		pst = conn.prepareStatement(str);
+		pst.setInt(1, id);
+		ResultSet rset = pst.executeQuery();
+		if(rset.next()){
+			inform = new Informing(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getString(4),rset.getString(5),
+					rset.getInt(6));
+			list.add(inform);
+		}
+		pst.close();
+		return list;
+	}
+	
+	public ArrayList<Informing> select2()throws Exception{   //查询所有的书籍
+		ArrayList<Informing> list=new ArrayList<Informing>();
+		Informing inform = null;
+		String str = "select * from Informing";
+		pst = conn.prepareStatement(str);
+		ResultSet rset = pst.executeQuery();
+		while(rset.next()){
+			inform = new Informing(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getString(4),rset.getString(5),
+					rset.getInt(6));
+			list.add(inform);
+		}
+		pst.close();
+		return list;
 	}
 }
 

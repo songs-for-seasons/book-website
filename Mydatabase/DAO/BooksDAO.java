@@ -145,26 +145,36 @@ public class BooksDAO{
 		BooksDAO b= new BooksDAO();
 		ArrayList<Books> list=b.select2();
 		int[] grade=new int[list.size()];
+		boolean[] select=new boolean[list.size()];
 		for(int i=0;i<list.size();i++)
-			grade[i]=i;
-		for(int i=0;i<list.size()-1;i++)
+		{
+			grade[i]=0;
+			select[i]=false;
+		}
+		
+		for(int i=0;i<list.size();i++)
 		{
 			int mg=list.get(i).getBgrade();
-			int mid=i;
-			for(int j=i+1;j<list.size();j++)
+			int k;
+			for( k=0;k<list.size();k++)
+				if(select[k]==false)
+					break;
+			int mid=k;
+			for(int j=0;j<list.size();j++)
 			{
-				if(list.get(mid).getBgrade()<list.get(j).getBgrade())
+				if(list.get(mid).getBgrade()<list.get(j).getBgrade() && select[j]==false)
 				{
 					mid=j;
 					mg=list.get(mid).getBgrade();
 				}
 			}
 			grade[i]=mid;
+			select[mid]=true;
 		}
 		ArrayList<Books> list2=new ArrayList<Books>();
 		for(int i=0;i<num;i++)
-			list2.add(b.select(grade[i]));
-		return list;
+			list2.add(list.get(grade[i]));
+		return list2;
 	}
 
 	

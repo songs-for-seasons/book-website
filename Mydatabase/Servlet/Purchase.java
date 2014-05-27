@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -42,18 +43,31 @@ public class Purchase extends HttpServlet{
 			if(flag == 1){
 				ReaderDAO rdao = new ReaderDAO();
 				Reader r = rdao.select(uid);
-				rdao.minCoin(r, c, charge);
-				request.getSession().setAttribute("userid",r.getRid());
-				request.getSession().setAttribute("username",r.getRname());
+				if(r.getCoin() < charge){
+					PrintWriter out = response.getWriter();
+					out.println("<script language = javascript>alert('ÄúµÄÓà¶î²»×ã£¬Çë³äÖµ£¡');");
+					out.println("location.href='charge.jsp'</script>"); 
+				}
+				else{
+					rdao.minCoin(r, c, charge);
+					request.getSession().setAttribute("userid",r.getRid());
+					request.getSession().setAttribute("username",r.getRname());
+				}
 				
 			}
 			else if(flag == 2){
 				WriterDAO wdao = new WriterDAO();
 				Writer w = wdao.select(uid);
-				wdao.minCoin(w, c, charge);
-				request.getSession().setAttribute("userid",w.getWid());
-				request.getSession().setAttribute("username",w.getWname());
-				
+				if(w.getCoin() < charge){
+					PrintWriter out = response.getWriter();
+					out.println("<script language = javascript>alert('ÄúµÄÓà¶î²»×ã£¬Çë³äÖµ£¡');");
+					out.println("location.href='charge.jsp'</script>"); 
+				}
+				else{
+					wdao.minCoin(w, c, charge);
+					request.getSession().setAttribute("userid",w.getWid());
+					request.getSession().setAttribute("username",w.getWname());
+				}
 			}
 			
 			request.getSession().setAttribute("bid",b.getBid());

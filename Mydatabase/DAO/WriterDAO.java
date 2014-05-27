@@ -165,7 +165,7 @@ public class WriterDAO{
 		return flag;
 	}*/
 
-	public ArrayList<Writer> top(int num)throws Exception{
+	/*public ArrayList<Writer> top(int num)throws Exception{
 		WriterDAO b= new WriterDAO();
 		ArrayList<Writer> list=b.select();
 		int[] grade=new int[list.size()];
@@ -190,7 +190,42 @@ public class WriterDAO{
 			list2.add(b.select(grade[i]));
 		return list;
 	
-}
+	}*/
+	public ArrayList<Writer> top(int num)throws Exception{
+		WriterDAO b= new WriterDAO();
+		ArrayList<Writer> list=b.select();
+		int[] grade=new int[list.size()];
+		boolean[] select=new boolean[list.size()];
+		for(int i=0;i<list.size();i++)
+		{
+			grade[i]=0;
+			select[i]=false;
+		}
+		
+		for(int i=0;i<list.size();i++)
+		{
+			int mg=list.get(i).getWgrade();
+			int k;
+			for( k=0;k<list.size();k++)
+				if(select[k]==false)
+					break;
+			int mid=k;
+			for(int j=0;j<list.size();j++)
+			{
+				if(list.get(mid).getWgrade()<list.get(j).getWgrade() && select[j]==false)
+				{
+					mid=j;
+					mg=list.get(mid).getWgrade();
+				}
+			}
+			grade[i]=mid;
+			select[mid]=true;
+		}
+		ArrayList<Writer> list2=new ArrayList<Writer>();
+		for(int i=0;i<num;i++)
+			list2.add(list.get(grade[i]));
+		return list2;
+	}
 
 }
 
