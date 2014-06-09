@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="Servlet.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -14,6 +15,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body background="image/background.jpg" alt="background" sroll="auto">
+<%
+session=request.getSession();
+Integer uid=(Integer)(session.getAttribute("userid"));
+ %>
 
 <div style="padding-left:150px; ">
 	<p>
@@ -50,6 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<form action="Charge" method="post" style="margin:0 0 0 0;">
 		<label><font size=5>充值的四季豆数量：<input class="charge_field" type="text" name="coin"/></font>
 		</label></br></br>
+		<input type="hidden" name="uid" value="<%=uid %>">
 		<!--<button id=reg_button type="button" onclick="clickCancel()">取消</button>&nbsp;&nbsp;&nbsp;
 		 <button id=reg_button type="button" onclick="">确定</button> -->
 		<input id=reg_button type="submit" onclick="return clickConfirm(coin)" value="确定">

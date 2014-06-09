@@ -1,12 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="DAO.*"%>
+<%@page import="Servlet.*" %>
+<%@page import="javax.servlet.http.HttpSession"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@page import="DAO.Writer"%>
-<%@page import="DAO.Reader"%>
-<%@page import="DAO.Function"%>
-<%@page import="Servlet.*" %>
 
 <!DOCTYPE html>
 <html>
@@ -42,87 +42,62 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <br>
 
 <div>
-<div><label><font size=5 style='position:absolute; left:275px'>【所有读者】</font></label></div><br>
-<table align="center" width="800">
-<form action="ViewUsers" method="post"></form>
-<tbody>
-	<tr bgcolor="F8B6DA">
-		<td>读者</td>
-		<td>读者</td>
-		<td>读者</td>
-		<td>读者</td>
-	</tr>
-	<br>
-	<%	ArrayList<Reader> rlist = Function.getReaderList();
-		String name[] = new String[4];
-		name[0] = "";
-		name[1] = "";
-		name[2] = "";
-		name[3] = "";
-		int num = rlist.size();
-		int i = 0;
-		for( ; i + 4<num; i = i+4) { %>
-		<tr>
-		<td><%=rlist.get(i).getRname()%></td>
-		<td><%=rlist.get(i+1).getRname()%></td>
-		<td><%=rlist.get(i+2).getRname()%></td>
-		<td><%=rlist.get(i+3).getRname()%></td>
-		<%}%></tr>
-		<% while(i < num){
-			int index = i % 4;
-			name[index] = rlist.get(i).getRname();
-			i++;
-		}%>
-		<tr>
-		<td><%=name[0] %></td>
-		<td><%=name[1] %></td>
-		<td><%=name[2] %></td>
-		<td><%=name[3] %></td>
+<div><label><font size=5 style='position:absolute; left:275px'>【所有读者】</font></label></div><br><br>
+<table class="wid" align="center" width="700">
+<form action="CheckUser" method="post" name="checkuser">
+	<tbody>
+		<tr bgcolor="F8B6DA">
+			<td width="15%"><b>读者ID</b></td>
+			<td width="35%"><b>读者名称</b></td>
+			<td width="50%"><b>读者简介</b></td>
 		</tr>
-</tbody>
+		<%	ArrayList<Reader> rlist = Function.getReaderList();
+			int num = rlist.size();
+			int i = 0;
+			for( ; i<num; i++) {
+				String rname = rlist.get(i).getRname();
+				if(rname == null) 
+					rname="";
+				String rintro = rlist.get(i).getRintro();
+					if(rintro == null)
+						rintro = "";%>
+				<tr bgcolor="FAC9E4">
+				<td><%=rlist.get(i).getRid() %></td>
+				<td><a href="CheckUser?userid=<%=rlist.get(i).getRid() %>&username=<%=rname%>"><%=rname %></a></td>
+				<td><%=rintro %></td>
+			<%}%></tr>
+	</tbody>
+</form>
 </table><br><br><br>
 </div>
-<div>
-<div><label><font size=5 style='position:absolute; left:275px'>【所有作家】</font></label></div><br>
-<table  align="center" width="800">
-<form action="ViewUsers" method="post"></form>
-<tbody>
-	<tr bgcolor="F8B6DA">
-		<td>作家</td>
-		<td>作家</td>
-		<td>作家</td>
-		<td>作家</td>
-	</tr>
-	<br>
-	<%	ArrayList<Writer> wlist = Function.getWriterList();
-		System.out.print(rlist.size());
-		name[0] = "";
-		name[1] = "";
-		name[2] = "";
-		name[3] = "";
-		num = wlist.size();
-		i = 0;
-		for(; i + 4<num; i += 4) { %>
-		<tr>
-		<td><%=wlist.get(i).getWname()%></td>
-		<td><%= wlist.get(i+1).getWname()%></td>
-		<td><%= wlist.get(i+2).getWname()%></td>
-		<td><%= wlist.get(i+3).getWname()%></td>
-		</tr>
-		<%}%>
-		<% while(i < num){
-			int index = i % 4;
-			name[index] = wlist.get(i).getWname();
-			i++;
-		}%>
-		<tr>
-		<td><%=name[0] %></td>
-		<td><%=name[1] %></td>
-		<td><%=name[2] %></td>
-		<td><%=name[3] %></td>
-		</tr>
 
-</tbody>
+<div>
+<div><label><font size=5 style='position:absolute; left:275px'>【所有作家】</font></label></div><br><br>
+<table class="wid" align="center" width="700">
+<form action="CheckUser" method="post">
+	<tbody>
+		<tr bgcolor="F8B6DA">
+			<td width="15%"><b>读者ID</b></td>
+			<td width="35%"><b>读者名称</b></td>
+			<td width="50%"><b>读者简介</b></td>
+		</tr>
+		<%	ArrayList<Writer> wlist = Function.getWriterList();
+			num = wlist.size();
+			i = 0;
+			for( ; i<num; i++) { 
+				String wname = wlist.get(i).getWname();
+				if(wname == null) 
+					wname="";
+				String wintro = wlist.get(i).getWintro();
+					if(wintro == null)
+						wintro = "";%>
+				<tr bgcolor="FAC9E4">
+				<td><%=wlist.get(i).getWid() %></td>
+				<td><a href="CheckUser?userid=<%=wlist.get(i).getWid() %>&username=<%=wname%>"><%=wname %></a></td>
+				<td><%=wintro %></td>
+			<%}%></tr>
+	</tbody>
+</form>
 </table>
 </div>
 

@@ -37,49 +37,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<li><a href="read_message.jsp">接收举报</a></li>
 </ul>
 </div>
-</br>
+<br>
 
 <div>
-<div><label><font size=5 style='position:absolute; left:275px'>【所有书籍】</font></label></div></br>
-<table  align="center" width="800">
-<form action="ViewBooks" method="post"></form>
-<tbody>
-	<tr bgcolor="F8B6DA">
-		<td>作品</td>
-		<td>作品</td>
-		<td>作品</td>
-		<td>作品</td>
-	</tr>
-	</br>
-	
-	<%	ArrayList<Books> blist = Function.getBooksList();
-		String name[] = new String[4];
-		name[0] = "";
-		name[1] = "";
-		name[2] = "";
-		name[3] = "";
-		int num = blist.size();
-		int i = 0;
-		for( ; i + 4<num; i = i+4) { %>
-		<tr>
-		<td><%=blist.get(i).getBname()%></td>
-		<td><%=blist.get(i+1).getBname()%></td>
-		<td><%=blist.get(i+2).getBname()%></td>
-		<td><%=blist.get(i+3).getBname()%></td>
-		<%}%></tr>
-		<% while(i < num){
-			int index = i % 4;
-			name[index] = blist.get(i).getBname();
-			i++;
-		}%>
-		<tr>
-		<td><%=name[0] %></td>
-		<td><%=name[1] %></td>
-		<td><%=name[2] %></td>
-		<td><%=name[3] %></td>
+<div><label><font size=5 style='position:absolute; left:275px'>【所有书籍】</font></label></div><br><br>
+<table class="wid" align="center" width="800" >
+<form action="ViewBooks" method="post">
+	<tbody>
+		<tr bgcolor="F8B6DA">
+			<td width="12%"><b>书籍ID</b></td>
+			<td width="30%"><b>书籍名称</b></td>
+			<td width="12%"><b>作家ID</b></td>
+			<td width="46%"><b>简介</b></td>
 		</tr>
-
-</tbody>
+		
+		<%	ArrayList<Books> blist = Function.getBooksList();
+			String name[] = new String[4];
+			int num = blist.size();
+			int i = 0;
+			for( ; i<num; i++) {
+				String bname = blist.get(i).getBname();
+				if(bname == null) 
+					bname="";
+				String bwid;
+				String bintro = blist.get(i).getBintro();
+				if(bintro == null)
+					bintro = "";%>
+				<tr bgcolor="FAC9E4">
+				<td><%=blist.get(i).getBid() %></td>
+				<td><a href="CheckBook?bid=<%=blist.get(i).getBid() %>"><%=bname %></a></td>
+				<td><a href="CheckUser?userid=<%=blist.get(i).getWid() %>"><%=blist.get(i).getWid() %></a></td>
+				<td><%=bintro %></td>
+			<%}%></tr>
+	</tbody>
+</form>
 </table>
 </div>
 </br></br></br></br>
