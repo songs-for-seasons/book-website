@@ -26,7 +26,9 @@ public class UpdateInfo extends HttpServlet{
 	}
 	//增加用户信息
 	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-		response.setContentType("text/html");
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+
 		int id = Integer.parseInt(request.getParameter("userid").trim());
 		String username = request.getParameter("username");
 		String usersex = request.getParameter("sex");

@@ -5,7 +5,7 @@ public class DbConn {
 	private static String dbClassName = "com.mysql.jdbc.Driver";
 	private static String dbUrl = "jdbc:mysql://localhost:3306/book";
 	private static String dbUser = "root";
-	private static String dbPassword = "admin";
+	private static String dbPassword = "jiangqi!@";
 //	private static Connection conn = null;
 	public DbConn(){
 		try{

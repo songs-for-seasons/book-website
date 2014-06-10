@@ -119,5 +119,21 @@ public class InformingDAO {
 		pst.close();
 		return list;
 	}
+	
+	public ArrayList<Informing> selecttype(int type)throws Exception{  //根据作品id查询
+		ArrayList<Informing> list=new ArrayList<Informing>();
+		Informing inform = null;
+		String str = "select * from Informing where itype = ?";
+		pst = conn.prepareStatement(str);
+		pst.setInt(1, type);
+		ResultSet rset = pst.executeQuery();
+		if(rset.next()){
+			inform = new Informing(rset.getInt(1),rset.getInt(2),rset.getInt(3),rset.getString(4),rset.getString(5),
+					rset.getInt(6));
+			list.add(inform);
+		}
+		pst.close();
+		return list;
+	}
 }
 

@@ -26,7 +26,9 @@ public class BookPage extends HttpServlet{
 	}
 	//增加用户信息
 	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-		response.setContentType("text/html");
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+
 		int uid = Integer.parseInt(request.getParameter("userid").trim());
 		int bid = Integer.parseInt(request.getParameter("bid").trim());
 		Function f = new Function();

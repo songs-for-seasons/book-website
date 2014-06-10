@@ -29,7 +29,9 @@ public class erchuan extends HttpServlet{
 	}
 	//增加用户信息
 	public void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-		response.setContentType("text/html");
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+
 		int uid = Integer.parseInt(request.getParameter("userid").trim());
 		String username = request.getParameter("username");
 		int bid = Integer.parseInt(request.getParameter("bid").trim());
