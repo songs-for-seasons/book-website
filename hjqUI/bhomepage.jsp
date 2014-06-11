@@ -40,22 +40,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		#info1
 		{
-			margin:0 auto;
+			
+			font-size:20px;
+			padding-left:10%;
+			text-align:center;
 		}
-		#clist
+		#clist,#rlist
 		{
 			margin:0 auto;
 			text-align:center;
 			width:800px;
-			
+			font-size:20px;
 		}
 		#chapter
 		{
 			padding-left:10%;
+			
 		}
 		#binfo
 		{
 			padding-left:30%;
+			
 		}
 		.t1 {background-color:#f0f0f0;text-align:center} 
 		.t2 {background-color:#EDF6FF;text-align:center} 
@@ -83,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
   </head>
   
-  <body>
+ <body background="image/background.jpg" alt="background" sroll="auto">
    <%	session=request.getSession();
   		String username=(String)(session.getAttribute("username"));
   		Integer userID=(Integer)(session.getAttribute("userid"));
@@ -100,9 +105,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		String bintro=(String)(session.getAttribute("bintro"));
 	%>
     <div id="top">
-  		<div id="logo"><img src="image/logo.jpg" height=40px width=200px></div>
+  		<table>
+  		<tr>
+  			<td>
+  		<div id="logo" style="padding-left:150px; "><a href="homepage.jsp?userID=<%=userID %>&userName=<%=username %>"><img src="image/logo.png" alt="logo" width="300" height="100"></a></div></td>
+  			<td>
   		<div id="info">
-  			<table width="400px">
+  			<table width="400px" style="display:block">
   				<tr>
   					<td>欢迎回来：<a href="PersonalPage?userid=<%=userID%>&username=<%=username%>"><%=username %></a></td>
   					<td><a href="login.jsp">退出</a></td>
@@ -114,15 +123,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   			</table>
   		</div>
+  			</td>
+  			</tr>
+  		</table>
   	</div>
   	<br>
-  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#ff0080 SIZE=3>
-	<div id="binfo">
-		<table id="info1">
+  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="70%" color=#ff0080 SIZE=3>
+	<div id="binfo" >
+		<table id="info1" >
 		<tr>
-			<td rowspan="4"><img src="image/1.jpg" width="200px" height="320px"></td>
+			<td rowspan="4"><img src="image/<%=type %>.jpg" width="200px" height="320px"></td>
 			<td>
-				<table width="400px" height="300px">
+				<table width="400px" height="300px" style="font-size:20px">
 				<tr>
 					<td>书名：<%=bName %>&nbsp;&nbsp;&nbsp;&nbsp;作者:<a href="visitwriter?userID=<%=userID%>&wid=<%=wID%>"><%=wName%></a></td>
 				</tr>

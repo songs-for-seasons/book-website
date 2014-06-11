@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				padding-left:10px;
 				float:left
 			}
-		#info
+		#info1
 			{
 				padding-left:60%;
 				padding-right :10px;
@@ -41,6 +41,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		#content,#grade,#showcomment,#report,#recomment
 		{
 			padding-left:20%;
+			font-size:30px;
+			width:800px;
+		}
+		.mytable
+		{
+			width:800px;
+			font-size:30px;
 		}
 		-->
 	</style>
@@ -90,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
   </head>
   
-  <body>
+ <body background="image/background.jpg" alt="background" sroll="auto">
   <%	session=request.getSession();
   		String wName=(String)(session.getAttribute("wname"));
   		Integer userID=(Integer)(session.getAttribute("userid"));
@@ -103,12 +110,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		String cContent=(String)(session.getAttribute("content"));
 		int rid;
 		String time;%>
-   <div id="top">
-  		<div id="logo"><img src="image/logo.jpg" height=40px width=200px></div>
-  		<div id="info">
-  			<table width="400px">
+   	<div id="top">
+  		<table>
+  		<tr>
+  			<td>
+  		<div id="logo" style="padding-left:150px; "><a href="homepage.jsp?userID=<%=userID %>&userName=<%=userName %>"><img src="image/logo.png" alt="logo" width="300" height="100"></a></div></td>
+  			<td>
+  		<div id="info1">
+  			<table width="400px" style="display:block">
   				<tr>
- 					<td>欢迎回来：<a href="PersonalPage?userid=<%=userID%>&username=<%=userName%>"><%=userName %></a></td>
+  					<td>欢迎回来：<a href="PersonalPage?userid=<%=userID%>&username=<%=userName%>"><%=userName %></a></td>
   					<td><a href="login.jsp">退出</a></td>
   				</tr>
   				<tr>
@@ -118,27 +129,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   			</table>
   		</div>
+  			</td>
+  			</tr>
+  		</table>
   	</div>
   	<br>
-  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#ff0080 SIZE=3>
+  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="70%" color=#ff0080 SIZE=3>
   	<div id="content">
-  		<table id="ccontent">
+  		<table id="ccontent" class="mytable">
   			<tr>
-  				<td>书名：<%=bName %></td>
-  				<td>作者:<%=wName %></td>
+  				<td style="text-align:center;">书名：<a href="BookPage?userid=<%=userID%>&bid=<%=bID%>"><%=bName %></a></td>
+  				<td style="text-align:center;">作者:<%=wName %></td>
+  			</tr>
+  			<tr><td>                                                        </td></tr>
+  			<tr></tr>
+  			<tr>
+  				<td colspan="2" style="text-align:center;">第<%=cID %>章：<%=cTitle %></td>
   			</tr>
   			<tr>
-  				<td>第<%=cID %>章：<%=cTitle %></td>
-  			</tr>
-  			<tr>
-  				<td><p><%=cContent %></p></td>
+  				<td colspan="2"><p><%=cContent %></p></td>
   			</tr>
   		</table>
   	</div>
   	<br><br>
+  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="70%" color=#ff0080 SIZE=3>
+  	<br><br>
   	<div id="report">
   		<form id="form2" method="post" action="Report">
-  			<table>
+  			<table class="mytable">
   				<tr>
   					<td>举报人：<%=userName %></td>
   					<td>举报理由:
@@ -161,6 +179,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			</table>
   		</form>
   	</div>
+  	<br>
+  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="70%" color=#ff0080 SIZE=3>
+  	<br>
+  	<br>
   	<div id="grade">
   		<form id="form1"method="post" action="Remarking">
   			<span>打分：<input type="radio" value=1 name="grade">1&nbsp;&nbsp;&nbsp;
@@ -169,7 +191,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   						<input type="radio"value=4 name="grade">4&nbsp;&nbsp;&nbsp;
   						<input type="radio"value=5 name="grade">5&nbsp;&nbsp;&nbsp;
   			</span>
-  			<table>
+  			<table class="mytable">
   				<tr>
   					<td>评论人：<%=userName %></td>
   				</tr>
@@ -186,9 +208,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			</table>
   		</form>
   	</div>
+  	<br><br><br>
   	<%String n; %>
   	<div id="showcomment">
-  		<table id="rlist">
+  		<table id="rlist" width="600px" style="font-size:15px">
   			<% 	RemarkDAO r=new RemarkDAO();
 				Function f=new Function();
 				ReaderDAO re=new ReaderDAO();
@@ -234,7 +257,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</div>
   	<div id="recomment" style="display:none">
   		<form id="form2" method="post" action="Reremarking">
-  			<table>
+  			<table width="600px" style="font-size:15px">
   				<tr>
   					<td>回复人：<%=wName %></td>
   				</tr>

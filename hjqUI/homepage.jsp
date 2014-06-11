@@ -31,9 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$('#recommandinstation').slideBox({
 			 duration : 0.3,//滚动持续时间，单位：秒
 			easing : 'linear',//swing,linear//滚动特效
-			 delay : 5,//滚动延迟时间，单位：秒
+			 delay : 2,//滚动延迟时间，单位：秒
 			hideClickBar : false,//不自动隐藏点选按键
-			clickBarRadius : 10
+			clickBarRadius : 2
 		});
 	});
 	function fsubmit(obj)
@@ -43,6 +43,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 	<style type="text/css">
 		<!--
+			#rec {
+				padding-left:230px;
+				width: 900px;
+			}
+			#search {
+				padding-left:230px;
+			}
+			#recommandforperson {
+				padding-left:230px;
+				width: 900px;
+			}
 			#logo
 			{
 				padding-right:50%;
@@ -59,16 +70,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			#recommandinstation
 			{
 				margin:0 auto;
+				
 			}
 			#wrank
 			{
-				width:400px;
+				width:350px;
 				float:left;
 					
 			}
 			#brank
 			{
-				width:400px;
+				width:350px;
 				float:right;
 				
 			}
@@ -78,14 +90,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 			td,li
 			{
-				text-align:center;	
+				padding-left:30px;	
 			}
-		
+			#board {
+				width:900px;
+				padding-left:230px;
+			}
+			#top
+			{
+				width:800px;
+			}
 		-->
 	</style>
 </head>
   
-  <body>
+  <body background="image/background.jpg" alt="background" sroll="auto">
   <%
   	session=request.getSession();
   	Integer userID=(Integer)(session.getAttribute("userid"));
@@ -117,7 +136,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    </script>
   	
   	<div id="top">
-  		<div id="logo"><img src="image/logo.jpg" height=40px width=200px></div>
+  		<table>
+  		<tr>
+  			<td>
+  		<div id="logo" style="padding-left:150px; "><a href="homepage.jsp?userID=<%=userID %>&userName=<%=username %>"><img src="image/logo.png" alt="logo" width="300" height="100"></a></div></td>
+  			<td>
   		<div id="info1">
   			<table width="400px" style="display:block">
   				<tr>
@@ -140,9 +163,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   			</table>
   		</div>
+  			</td>
+  			</tr>
+  		</table>
   	</div>
   	<br>
-  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#ff0080 SIZE=3>
+  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="70%" color=#ff0080 SIZE=3>
  
   	<div id="rec">
   	<fieldset>
@@ -178,15 +204,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   					</table>
   					</li> 
   			<% }%>
-  			<%System.out.println("out for"); %>
   		</ul>
   	</div>
   	</fieldset>
   	</div>
   	<br>
-  	<div id="search" style="display:inline">
+  	<div style="display:inline" >
   	<form method="post" action="Search" name="form1">
-  		<table>
+  		<table id="search" >
   			<tr>
  				<td><h2>搜索：</h2></td>
   				<td><input type="text"></td>
@@ -198,20 +223,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div id="recommandforperson">
   		<fieldset>
   		<legend>个性推荐</legend>
-  		<table width="1000px">
-  			<tr>
-  				<td><a href="bhomepage.jsp"><img src="image/1.jpg" height="150px" width="100px"></a></td>
-  				<td><a href="bhomepage.jsp"><img src="image/2.jpg" height="150px"  width="100px"></a></td>
-  				<td><a href="bhomepage.jsp"><img src="image/3.jpg" height="150px"  width="100px"></a></td>
-  				<td><a href="bhomepage.jsp"><img src="image/4.jpg" height="150px"  width="100px"></a></td>
-  				<td><a href="bhomepage.jsp"><img src="image/5.jpg" height="150px"  width="100px"></a></td>
-  			</tr>
-  			<tr>
-  				<td>书名：XXX</td>
-  				<td>书名：XXX</td>
-  				<td>书名：XXX</td>
-  				<td>书名：XXX</td>
-  				<td>书名：XXX</td>
+  		<table width="850px">
+  			<%	SpendDAO s = new SpendDAO();
+   						WriterDAO wrd = new WriterDAO();
+   						ArrayList<Books> list4=s.bookhouse(userID);
+   						if(list4.size()!=0)
+   						{
+   						
+   						for(int i=0;i<java.lang.Math.min(5,list4.size());i++)
+   						{ %>
+		   					<tr>
+		   						<td>
+		   							<table>
+		   								<tr>
+		   									<td><a href="BookPage?userid=<%=userID %>&bid=<%=list4.get(i).getBid() %>"><img src="image/<%=list4.get(i).getType() %>.jpg" height=150px></a></td>
+		   								</tr>
+		   								<tr>
+		   									<td><a href="BookPage?userid=<%=userID%>&bid=<%=list4.get(i).getBid()%>"><%=list4.get(i).getBname() %></a></td>
+		   								</tr>
+		   							</table>
+		   						</td>
+		   					</tr>
+		   				<%} 
+		   				}%>
   		</table>
   		</fieldset>
   	</div>
@@ -244,5 +278,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			</fieldset>
   		</div>
   	</div>
+  	<br>
+  	<br>
+  	<div></div>
   </body>
 </html>

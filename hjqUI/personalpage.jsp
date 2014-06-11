@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				padding-left:10px;
 				float:left
 			}
-		#info
+		#info1
 			{
 				padding-left:60%;
 				padding-right :10px;
@@ -41,7 +41,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		.right
 		{
 			margin-top:20px;
-			float:left;
+			
+			width:900px;
+			padding-left:230px;
 		}
 		.login 
 		{ 
@@ -53,13 +55,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		.tag 
 		{ 
-			width:1000px; 
+			width:800px; 
 			height:29px; 
 			line-height:29px; 
 		}
 		.tag td 
 		{ 
-			width:250px; 
+			width:200px; 
 			height:29px; 
 			line-height:29px; 
 			float:left; 
@@ -69,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		.tag td.on 
 		{ 
-			width:250px; 
+			width:200px; 
 			height:29px; 
 			line-height:29px; 
 			float:left; 
@@ -81,11 +83,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		{
 			margin:0 auto;
 			padding-top:-10px;
+			padding-left:200px;
 		}
 		.regContainer
 		{
 			margin:0 auto;
-			width:1000px;
+			width:850px;
 			height:701px;
 			border:1px solid #D1D1D1; 
 			background-color:#ff79bc;
@@ -106,7 +109,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		#iDiv,#eDiv
 		{
 			margin:0 auto;
-			padding-left:300px;
+			padding-left:230px;
+			width:800px;
 		}
 		#booklist
 		{
@@ -122,17 +126,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var edit = document.getElementById("edit");
 			var consuption= document.getElementById("consuption");
 			var favourite= document.getElementById("favourite");
+			var message = document.getElementById("message");
  			var iDiv = document.getElementById("iDiv");
  			var eDiv = document.getElementById("eDiv");
  			var cDiv = document.getElementById("cDiv");
  			var fDiv = document.getElementById("fDiv");
- 
+ 			var mDiv = document.getElementbyId("mDiv");
  			if(liObj == information)
  			{
   				information.className = "on";
   				edit.className = "";
   				consuption.className = "";
   				favourite.className = "";
+  				message.className="";
  			}
  			else if(liObj == edit)
  			{
@@ -140,6 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				information.className = "";
   				consuption.className = "";
   				favourite.className = "";
+  				message.className="";
  			}
  			else if(liObj == consuption)
  			{
@@ -147,6 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				information.className = "";
   				edit.className = "";
   				favourite.className = "";
+  				message.className="";
  			}
  			else if(liObj == favourite)
  			{
@@ -154,6 +162,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				information.className = "";
   				consuption.className = "";
   				edit.className = "";
+  				message.className="";
+ 			}
+ 			else if(liObj == message)
+ 			{
+ 				favourite.className = "";
+  				information.className = "";
+  				consuption.className = "";
+  				edit.className = "";
+  				message.className="on";
  			}
 			if(information.className == "on")
 			{
@@ -161,6 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				eDiv.style.display = "none";
   				cDiv.style.display = "none";
   				fDiv.style.display = "none";
+  				mDiv.style.display = "none";
   			}
   			else if(edit.className == "on")
   			{
@@ -168,6 +186,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				eDiv.style.display = "";
  				cDiv.style.display = "none";
  				fDiv.style.display = "none";
+ 				mDiv.style.display = "none";
  			}
  			else if(consuption.className == "on")
   			{
@@ -175,6 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				eDiv.style.display = "none";
  				cDiv.style.display = "";
  				fDiv.style.display = "none";
+ 				mDiv.style.display = "none";
  			}
  			else if(favourite.className == "on")
   			{
@@ -182,6 +202,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				eDiv.style.display = "none";
  				cDiv.style.display = "none";
  				fDiv.style.display = "";
+ 				mDiv.style.display = "none";
+ 			}
+ 			else if(message.className == "on")
+  			{
+  				iDiv.style.display = "none";
+ 				eDiv.style.display = "none";
+ 				cDiv.style.display = "none";
+ 				fDiv.style.display = "none";
+ 				mDiv.style.display = "";
  			}
 	}
 	function checkform(theform)
@@ -203,28 +232,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
   </head>
   
-  <body>
-   <%
-  	session=request.getSession();
-  	String username=(String)(session.getAttribute("username"));
-  	Integer userID=(Integer)(session.getAttribute("userid"));
-  	String sex=(String)(session.getAttribute("sex"));
-  	Integer level=(Integer)(session.getAttribute("level"));
-  	Integer type=(Integer)(session.getAttribute("level"));
-  	String date=(String)(session.getAttribute("birthday"));
-  	String intro=(String)(session.getAttribute("intro"));
-  	System.out.println("birthday: "+date);
-  	String password=(String)(session.getAttribute("password"));
-  	Integer balance=(Integer)(session.getAttribute("balance"));
-  	if(userID==null)
-  		System.out.println("111111");
-  	else
-  		System.out.println(userID);
+  <body  background="image/background.jpg" alt="background" sroll="auto">
+   <% 
+  	session=request.getSession(); 
+  	String username=(String)(session.getAttribute("username")); 
+  	if(username == null) 
+  		username = ""; 
+  	Integer userID=(Integer)(session.getAttribute("userid")); 
+  	String sex=(String)(session.getAttribute("sex")); 
+  	if(sex == null) 
+  		sex = ""; 
+  	Integer level=(Integer)(session.getAttribute("level")); 
+  	Integer type=(Integer)(session.getAttribute("level")); 
+  	String date=(String)(session.getAttribute("birthday")); 
+  	if(date == null) 
+  		date = ""; 
+  	String intro=(String)(session.getAttribute("intro")); 
+  	if(intro == null) 
+  		intro = ""; 
+  	String password=(String)(session.getAttribute("password")); 
+  	if(password == null) 
+  		password = ""; 
+  	Integer balance=(Integer)(session.getAttribute("balance")); 
    %>
     <div id="top">
-  		<div id="logo"><img src="image/logo.jpg" height=40px width=200px></div>
-  		<div id="info">
-  			<table width="400px">
+  		<table>
+  		<tr>
+  			<td>
+  		<div id="logo" style="padding-left:150px; "><a href="homepage.jsp?userID=<%=userID %>&userName=<%=username %>"><img src="image/logo.png" alt="logo" width="300" height="100"></a></div></td>
+  			<td>
+  		<div id="info1">
+  			<table width="400px" style="display:block">
   				<tr>
   					<td>欢迎回来：<a href="PersonalPage?userid=<%=userID%>&username=<%=username%>"><%=username %></a></td>
   					<td><a href="login.jsp">退出</a></td>
@@ -236,9 +274,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   			</table>
   		</div>
+  			</td>
+  			</tr>
+  		</table>
   	</div>
   	<br>
-  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#ff0080 SIZE=3>
+  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="70%" color=#ff0080 SIZE=3>
   	<div class="right">
     	<div class="tag">
      		<table id="tags">
@@ -247,6 +288,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      				<td id="edit" onclick="toSwitch(this)">编辑个人信息</td>
      				<td id="consuption" onclick="toSwitch(this)">消费记录</td>
      				<td id="favourite" onclick="toSwitch(this)">个人书屋</td>
+     				<td id="message" onclick="toSwitch(this)">查看公告</td>
      			</tr>
      		</table>
     	</div>
@@ -373,6 +415,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    					
    				</table>
    				</center> 
+   			</div>
+   			<div id="mDiv" class="regContainer" style="display:none;">
+   				<center>
+   					<table id="mlist">
+   						<tr>
+   							<td>发布时间</td>
+   							<td>内容</td>
+   						</tr>
+   						<%	InformingDAO inf= new InformingDAO();
+   							ArrayList<Informing> list3 = inf.selecttype(1);
+   							if(list3.size()!=0)
+   							{
+   								for(int i=0;i<list3.size();i++)
+   								{
+   						 %>
+   						 	<tr>
+   						 		<td><%=list3.get(i).getTime() %></td>
+   						 		<td><%=list3.get(i).getReason() %></td>
+   						 	</tr>
+   						 <%}} %>	
+   					</table>
+   				</center>
    			</div>
    		 </div>
   	</div>

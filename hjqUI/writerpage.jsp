@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				padding-left:10px;
 				float:left
 			}
-		#info
+		#info1
 			{
 				padding-left:60%;
 				padding-right :10px;
@@ -41,19 +41,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		.right
 		{
 			margin-top:20px;
-			float:left;
+			padding-left:230px;
+			width:850px;
 		}
 		.login 
 		{ 
 			margin:0 auto;
-			width:1000px; 
+			width:800px; 
 			height:500px; 
 			border:1px solid #D1D1D1; 
 			background-color:#ff79bc; 
 		}
 		.tag 
 		{ 
-			width:1000px; 
+			width:800px; 
 			height:29px; 
 			line-height:29px; 
 		}
@@ -79,13 +80,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		.shows
 		{
-			margin:0 auto;
+			padding-left:100px;
 			padding-top:-10px;
 		}
 		.regContainer
 		{
-			margin:0 auto;
-			width:1000px;
+			padding-left:230px;
+			width:800px;
 			height:701px;
 			border:1px solid #D1D1D1; 
 			background-color:#ff79bc;
@@ -95,23 +96,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			font-family:"宋体";
 			font-size:40px;
 		}
-		#pi
+		.pi
 		{
 			margin:0 auto;
 			padding-top:20px;
-			font-size:40px;
+			font-size:20px;
 			height:200px;
-			width:900px;
+			width:500px;
 		}
-		#iDiv,#eDiv
+		#create
 		{
-			margin:0 auto;
-			padding-left:300px;
+			
+			padding-top:20px;
+			font-size:15px;
+			height:200px;
+			width:700px;
+		}
+		#iDiv,#eDiv,#cDiv,#fDiv,#uDiv,#wDiv
+		{
+			
+			padding-left:100px;
+			width:700px;
 		}
 		#booklist
 		{
-			width:800px;
-			font-size:60px;
+			width:600px;
+			font-size:20px;
+		}
+		#submit
+		{
+			padding-left:300px;
 		}
 		select {
   		-webkit-appearance: button;
@@ -156,12 +170,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var favourite= document.getElementById("favourite");
 			var update= document.getElementById("update");
 			var write= document.getElementById("write");
+			var message=document.getElementById("message");
  			var iDiv = document.getElementById("iDiv");
  			var eDiv = document.getElementById("eDiv");
  			var cDiv = document.getElementById("cDiv");
  			var fDiv = document.getElementById("fDiv");
  			var uDiv = document.getElementById("uDiv");
  			var wDiv = document.getElementById("wDiv");
+ 			var mDiv = document.getElementById("mDiv");
  
  			if(liObj == information)
  			{
@@ -171,6 +187,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				favourite.className = "";
   				update.className = "";
   				write.className = "";
+  				message.className="";
  			}
  			else if(liObj == edit)
  			{
@@ -180,6 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				favourite.className = "";
   				update.className = "";
   				write.className = "";
+  				message.className="";
   				
  			}
  			else if(liObj == consuption)
@@ -190,6 +208,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				favourite.className = "";
   				update.className = "";
   				write.className = "";
+  				message.className="";
  			}
  			else if(liObj == favourite)
  			{
@@ -199,6 +218,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				favourite.className = "on";
   				update.className = "";
   				write.className = "";
+  				message.className="";
  			}
  			else if(liObj == update)
  			{
@@ -208,6 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				favourite.className = "";
   				update.className = "on";
   				write.className = "";
+  				message.className="";
  			}
  			else if(liObj == write)
  			{
@@ -217,6 +238,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				favourite.className = "";
   				update.className = "";
   				write.className = "on";
+  				message.className="";
+ 			}
+ 			else if(liObj == message)
+ 			{
+ 				information.className = "";
+  				edit.className = "";
+  				consuption.className = "";
+  				favourite.className = "";
+  				update.className = "";
+  				write.className = "";
+  				message.className="on";
  			}
 			if(information.className == "on")
 			{
@@ -226,6 +258,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				fDiv.style.display = "none";
   				uDiv.style.display = "none";
   				wDiv.style.display = "none";
+  				mDiv.style.display = "none";
   			}
   			else if(edit.className == "on")
   			{
@@ -235,7 +268,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				fDiv.style.display = "none";
  				uDiv.style.display = "none";
   				wDiv.style.display = "none";
-  				
+  				mDiv.style.display = "none";
  			}
  			else if(consuption.className == "on")
   			{
@@ -245,6 +278,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				fDiv.style.display = "none";
  				uDiv.style.display = "none";
   				wDiv.style.display = "none";
+  				mDiv.style.display = "none";
  			}
  			else if(favourite.className == "on")
   			{
@@ -254,6 +288,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				fDiv.style.display = "";
  				uDiv.style.display = "none";
   				wDiv.style.display = "none";
+  				mDiv.style.display = "none";
  			}
  			else if(update.className == "on")
   			{
@@ -263,6 +298,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				fDiv.style.display = "none";
  				uDiv.style.display = "";
   				wDiv.style.display = "none";
+  				mDiv.style.display = "none";
  			}
  			else if(write.className == "on")
   			{
@@ -272,6 +308,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				fDiv.style.display = "none";
  				uDiv.style.display = "none";
   				wDiv.style.display = "";
+  				mDiv.style.display = "none";
+ 			}
+ 			else if(write.className == "on")
+  			{
+  				iDiv.style.display = "none";
+ 				eDiv.style.display = "none";
+ 				cDiv.style.display = "none";
+ 				fDiv.style.display = "none";
+ 				uDiv.style.display = "none";
+  				wDiv.style.display = "none";
+  				mDiv.style.display = "";
  			}
 	}
 	function checkform(theform)
@@ -297,7 +344,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
   </head>
   
-  <body>
+  <body background="image/background.jpg" alt="background" sroll="auto">
   <%session =request.getSession();
   Integer userID = (Integer)(session.getAttribute("userid"));
   String username = (String)(session.getAttribute("username"));
@@ -310,9 +357,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	Integer balance=(Integer)(session.getAttribute("balance"));
   	%>
   	<div id="top">
-  		<div id="logo"><img src="image/logo.jpg" height=40px width=200px></div>
-  		<div id="info">
-  			<table width="400px">
+  		<table>
+  		<tr>
+  			<td>
+  		<div id="logo" style="padding-left:150px; "><a href="homepage.jsp?userID=<%=userID %>&userName=<%=username %>"><img src="image/logo.png" alt="logo" width="300" height="100"></a></div></td>
+  			<td>
+  		<div id="info1">
+  			<table width="400px" style="display:block">
   				<tr>
   					<td>欢迎回来：<a href="PersonalPage?userid=<%=userID%>&username=<%=username%>"><%=username %></a></td>
   					<td><a href="login.jsp">退出</a></td>
@@ -324,9 +375,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   			</table>
   		</div>
+  			</td>
+  			</tr>
+  		</table>
   	</div>
   	<br>
-  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#ff0080 SIZE=3>
+  	<hr style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="70%" color=#ff0080 SIZE=3>
   	<div class="right">
     	<div class="tag">
      		<table id="tags">
@@ -337,16 +391,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      				<td id="favourite" onclick="toSwitch(this)">个人书屋</td>
      				<td id="update" onclick="toSwitch(this)">添加新章节</td>
      				<td id="write" onclick="toSwitch(this)">创建新书</td>
+     				<td id="message" onclick="toSwitch(this)">查看公告</td>
      			</tr>
      		</table>
     	</div>
     	<div id="shows">
         	<div id="iDiv" class="login">
-        		<table id="pi" >
+        		<table class="pi" >
         			<tr>
         				<td><img src="image/female.jpg"></td>
         				<td>
-        					<table>
+        					<table class="pi">
         						<tr>
         							<td>姓名：</td>
         							<td><%=username %></td>
@@ -375,10 +430,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         					</table>
         				</td>
         			</tr>
+        		</table>
+        		<table class="pi">
         			<tr>
         				<td>主要作品</td>
+        			</tr>
+        			<tr>
+  
         				<td>
-        					<table>
+        					<table class="pi">
         						<tr>
         							<td>书名&nbsp;&nbsp;</td>
         							<td>字数&nbsp;&nbsp;</td>
@@ -390,13 +450,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         						<%
         							BooksDAO b = new BooksDAO();
         							ArrayList<Books> list=b.selectid(userID);
-        							System.out.println("3333333333333");
         							for(int i=0;i<list.size();i++)
         							{
         								String sta;
         						%>
         							<tr>
-        								<td><%=list.get(i).getBname() %></td>
+        								<td><a href="BookPage?userid=<%=userID%>&bid=<%=list.get(i).getBid()%>"><%=list.get(i).getBname() %></a></td>
         								<td><%=list.get(i).getWords() %></td>
         								<%	if(list.get(i).getIsfinished()==0)
         										sta=new String("连载中");
@@ -417,7 +476,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	</div>
    			<div id="eDiv" class="regContainer" style="display:none;"> 
    				<form id="form1" method="post" action="UpdateInfo">
-   					<table>
+   					<table class="pi">
    						<tr>
    							<td>姓名：</td>
    							<td><input type="text" value="<%=username %>" id="username"></td>
@@ -438,7 +497,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					</tr>
     					
    					</table>
-   					<div>
+   					<div id="submit">
     						<button type="submit" onclick="checkform(this.form)" style="background:#fff0ac">提交修改</button>
     				</div>
    				</form>
@@ -501,7 +560,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			</div>
    			<div id="uDiv" class="regContainer" style="display:none;">
    				<div id="search" style="display:inline">
-  					<table align="center">
+  					<table align="center" class="pi">
   						<tr>
   							<td>书名</td>
   							<td>简介</td>
@@ -530,7 +589,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			</div>
    			<div id="wDiv" class="regContainer" style="display:none;">
    				<form id="form3" method="post"	action="NewBook">
-   					<table>
+   					<table id="create" width="700px">
    						<tr>
    							<td>书名：</td>
    							<td><input type="text" name="bname" id="bname"></td>
@@ -566,6 +625,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    							
    							
    				</form>
+   			</div>
+   			<div id="mDiv" class="regContainer" style="display:none;">
+   				<center>
+   					<table id="mlist">
+   						<tr>
+   							<td>发布时间</td>
+   							<td>内容</td>
+   						</tr>
+   						<%	InformingDAO inf= new InformingDAO();
+   							ArrayList<Informing> list3 = inf.selecttype(1);
+   							if(list3.size()!=0)
+   							{
+   								for(int i=0;i<list3.size();i++)
+   								{
+   						 %>
+   						 	<tr>
+   						 		<td><%=list3.get(i).getTime() %></td>
+   						 		<td><%=list3.get(i).getReason() %></td>
+   						 	</tr>
+   						 <%}} %>	
+   					</table>
+   				</center>
    			</div>
    		 </div>
   	</div>  
