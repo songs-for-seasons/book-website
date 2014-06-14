@@ -72,8 +72,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	Integer userID=(Integer)(session.getAttribute("userid"));
   	Integer bID=(Integer)(session.getAttribute("bid"));
 	String bName=(String)(session.getAttribute("bname"));
-	System.out.println(bID);
-	System.out.println(bName);
    %>
     <div id="top">
   		<table>
@@ -89,7 +87,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   				<tr>
   					<td><a href="help.jsp">新手导航</a></td>
-  					<td><a href="">个人书屋</a></td>
   					<td><a href="charge.jsp?uid=<%=userID%>">充值</a></td>
   				</tr>
   			</table>

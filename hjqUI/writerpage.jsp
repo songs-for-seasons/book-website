@@ -112,7 +112,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			height:200px;
 			width:700px;
 		}
-		#iDiv,#eDiv,#cDiv,#fDiv,#uDiv,#wDiv
+		#iDiv,#eDiv,#cDiv,#fDiv,#uDiv,#wDiv,#mDiv
 		{
 			
 			padding-left:100px;
@@ -310,7 +310,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				wDiv.style.display = "";
   				mDiv.style.display = "none";
  			}
- 			else if(write.className == "on")
+ 			else if(message.className == "on")
   			{
   				iDiv.style.display = "none";
  				eDiv.style.display = "none";
@@ -370,7 +370,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   				<tr>
   					<td><a href="help.jsp">新手导航</a></td>
-  					<td><a href="">个人书屋</a></td>
   					<td><a href="charge.jsp?uid=<%=userID%>">充值</a></td>
   				</tr>
   			</table>
@@ -513,9 +512,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    					 </table>
     				<table id="spendrecord" rules="rows" >
    					<thead>
-						<th><font face="Agency FB" size="6" color="#484891">时间</font></th>
-						<th><font face="Agency FB" size="6" color="#64a600">类型</font></th>
-						<th><font face="Agency FB" size="6" color="#ea0000">金额</font></th>
+						<th><font face="Agency FB" size="6" color="#64a600">消费类型</font></th>
+						<th><font face="Agency FB" size="6" color="#ea0000">消费四季豆</font></th>
 					</thead>
 					<tbody>
 					<%	SpendDAO spdlist = new SpendDAO();
@@ -628,21 +626,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			</div>
    			<div id="mDiv" class="regContainer" style="display:none;">
    				<center>
-   					<table id="mlist">
+   					<table id="mlist" class="pi">
    						<tr>
    							<td>发布时间</td>
    							<td>内容</td>
    						</tr>
    						<%	InformingDAO inf= new InformingDAO();
-   							ArrayList<Informing> list3 = inf.selecttype(1);
-   							if(list3.size()!=0)
+   							ArrayList<Informing> list5 = inf.selecttype(1);
+   							if(list5.size()!=0)
    							{
-   								for(int i=0;i<list3.size();i++)
+   								for(int j=0;j<list5.size();j++)
    								{
    						 %>
    						 	<tr>
-   						 		<td><%=list3.get(i).getTime() %></td>
-   						 		<td><%=list3.get(i).getReason() %></td>
+   						 		<td><%=list5.get(j).getTime() %></td>
+   						 		<td><%=list5.get(j).getReason() %></td>
    						 	</tr>
    						 <%}} %>	
    					</table>

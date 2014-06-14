@@ -7,6 +7,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -22,7 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<link type="text/css" rel="stylesheet" href="css/styles.css" >
 	<style type="text/css">
 		<!--
 		#logo
@@ -41,14 +41,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		.right
 		{
 			margin-top:20px;
-			
-			width:900px;
 			padding-left:230px;
+			width:850px;
 		}
 		.login 
 		{ 
 			margin:0 auto;
-			width:1000px; 
+			width:800px; 
 			height:500px; 
 			border:1px solid #D1D1D1; 
 			background-color:#ff79bc; 
@@ -61,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		.tag td 
 		{ 
-			width:200px; 
+			width:160px; 
 			height:29px; 
 			line-height:29px; 
 			float:left; 
@@ -71,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		.tag td.on 
 		{ 
-			width:200px; 
+			width:160px; 
 			height:29px; 
 			line-height:29px; 
 			float:left; 
@@ -81,14 +80,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		.shows
 		{
-			margin:0 auto;
+			padding-left:100px;
 			padding-top:-10px;
-			padding-left:200px;
 		}
 		.regContainer
 		{
-			margin:0 auto;
-			width:850px;
+			padding-left:230px;
+			width:800px;
 			height:701px;
 			border:1px solid #D1D1D1; 
 			background-color:#ff79bc;
@@ -98,40 +96,86 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			font-family:"宋体";
 			font-size:40px;
 		}
-		#pi
+		.pi
 		{
 			margin:0 auto;
 			padding-top:20px;
-			font-size:40px;
+			font-size:20px;
 			height:200px;
-			width:400px;
+			width:500px;
 		}
-		#iDiv,#eDiv
+		#create
 		{
-			margin:0 auto;
-			padding-left:230px;
-			width:800px;
+			
+			padding-top:20px;
+			font-size:15px;
+			height:200px;
+			width:700px;
+		}
+		#iDiv,#eDiv,#cDiv,#fDiv,#uDiv,#wDiv,#mDiv
+		{
+			
+			padding-left:100px;
+			width:700px;
 		}
 		#booklist
 		{
-			width:800px;
-			font-size:60px;
+			width:600px;
+			font-size:20px;
 		}
+		#submit
+		{
+			padding-left:300px;
+		}
+		select {
+  		-webkit-appearance: button;
+  		-webkit-border-radius: 2px;
+  		-webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  		-webkit-padding-end: 20px;
+  		-webkit-padding-start: 2px;
+  		-webkit-user-select: none;
+  		background-image: url(../images/select-arrow.png), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+  		background-position: center right;
+  		background-repeat: no-repeat;
+  		border: 1px solid #AAA;
+  		color: #555;
+  		font-size: inherit;
+  		margin: 0;
+  		overflow: hidden;
+ 		padding-top: 2px;
+  		padding-bottom: 2px;
+  		text-overflow: ellipsis;
+  		white-space: nowrap;}
+  		#binfo1
+  		{
+  			float:left;
+  			padding-left:200px;
+  			width:450px;
+  		}
+  		#binfo2
+  		{
+  
+  			width:400px;
+  			padding-right:100px;
+  		}
 		-->
 	</style>
 	<script type="text/javascript">
     	function toSwitch(liObj)
     	{
+   			
  			var information = document.getElementById("information");
 			var edit = document.getElementById("edit");
 			var consuption= document.getElementById("consuption");
 			var favourite= document.getElementById("favourite");
-			var message = document.getElementById("message");
+			var message=document.getElementById("message");
+			
  			var iDiv = document.getElementById("iDiv");
  			var eDiv = document.getElementById("eDiv");
  			var cDiv = document.getElementById("cDiv");
  			var fDiv = document.getElementById("fDiv");
- 			var mDiv = document.getElementbyId("mDiv");
+ 			var mDiv = document.getElementById("mDiv");
+ 
  			if(liObj == information)
  			{
   				information.className = "on";
@@ -142,34 +186,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  			}
  			else if(liObj == edit)
  			{
- 				 edit.className = "on";
-  				information.className = "";
+ 				information.className = "";
+  				edit.className = "on";
   				consuption.className = "";
   				favourite.className = "";
   				message.className="";
+  				
  			}
  			else if(liObj == consuption)
  			{
- 				consuption.className = "on";
-  				information.className = "";
+ 				information.className = "";
   				edit.className = "";
+  				consuption.className = "on";
   				favourite.className = "";
   				message.className="";
  			}
  			else if(liObj == favourite)
  			{
- 				favourite.className = "on";
-  				information.className = "";
-  				consuption.className = "";
+ 				information.className = "";
   				edit.className = "";
+  				consuption.className = "";
+  				favourite.className = "on";
   				message.className="";
  			}
  			else if(liObj == message)
  			{
- 				favourite.className = "";
-  				information.className = "";
-  				consuption.className = "";
+ 				information.className = "";
   				edit.className = "";
+  				consuption.className = "";
+  				favourite.className = "";
   				message.className="on";
  			}
 			if(information.className == "on")
@@ -186,7 +231,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				eDiv.style.display = "";
  				cDiv.style.display = "none";
  				fDiv.style.display = "none";
- 				mDiv.style.display = "none";
+  				mDiv.style.display = "none";
  			}
  			else if(consuption.className == "on")
   			{
@@ -194,7 +239,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				eDiv.style.display = "none";
  				cDiv.style.display = "";
  				fDiv.style.display = "none";
- 				mDiv.style.display = "none";
+  				mDiv.style.display = "none";
  			}
  			else if(favourite.className == "on")
   			{
@@ -202,15 +247,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  				eDiv.style.display = "none";
  				cDiv.style.display = "none";
  				fDiv.style.display = "";
- 				mDiv.style.display = "none";
+  				mDiv.style.display = "none";
  			}
+ 			
  			else if(message.className == "on")
   			{
   				iDiv.style.display = "none";
  				eDiv.style.display = "none";
  				cDiv.style.display = "none";
  				fDiv.style.display = "none";
- 				mDiv.style.display = "";
+  				mDiv.style.display = "";
  			}
 	}
 	function checkform(theform)
@@ -228,34 +274,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				return false;
   			}
 			return true;
-		}    
+		}
+	function fsubmit(obj)
+	{
+		obj.submit();
+	}    
 	</script>
   </head>
   
-  <body  background="image/background.jpg" alt="background" sroll="auto">
-   <% 
-  	session=request.getSession(); 
-  	String username=(String)(session.getAttribute("username")); 
-  	if(username == null) 
-  		username = ""; 
-  	Integer userID=(Integer)(session.getAttribute("userid")); 
-  	String sex=(String)(session.getAttribute("sex")); 
-  	if(sex == null) 
-  		sex = ""; 
-  	Integer level=(Integer)(session.getAttribute("level")); 
-  	Integer type=(Integer)(session.getAttribute("level")); 
-  	String date=(String)(session.getAttribute("birthday")); 
-  	if(date == null) 
-  		date = ""; 
-  	String intro=(String)(session.getAttribute("intro")); 
-  	if(intro == null) 
-  		intro = ""; 
-  	String password=(String)(session.getAttribute("password")); 
-  	if(password == null) 
-  		password = ""; 
-  	Integer balance=(Integer)(session.getAttribute("balance")); 
-   %>
-    <div id="top">
+  <body background="image/background.jpg" alt="background" sroll="auto">
+  <%session =request.getSession();
+  Integer userID = (Integer)(session.getAttribute("userid"));
+  String username = (String)(session.getAttribute("username"));
+  if(username == null)
+  	username = "";
+  String sex = (String)(session.getAttribute("sex"));
+  if(sex == null)
+  	sex = "";
+  	Integer level=(Integer)(session.getAttribute("level"));
+  	Integer type=(Integer)(session.getAttribute("type"));
+  	String date=(String)(session.getAttribute("date"));
+  	if(date == null)
+  		date = "";
+  	String intro=(String)(session.getAttribute("intro"));
+  	if(intro == null)
+  		intro = "";
+  	String password=(String)(session.getAttribute("password"));
+  	if(password == null)
+  		password = "";
+  	Integer balance=(Integer)(session.getAttribute("balance"));
+  	%>
+  	<div id="top">
   		<table>
   		<tr>
   			<td>
@@ -269,7 +318,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   				<tr>
   					<td><a href="help.jsp">新手导航</a></td>
-  					<td><a href="">个人书屋</a></td>
   					<td><a href="charge.jsp?uid=<%=userID%>">充值</a></td>
   				</tr>
   			</table>
@@ -294,11 +342,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	</div>
     	<div id="shows">
         	<div id="iDiv" class="login">
-        		<table id="pi" >
+        		<table class="pi" >
         			<tr>
         				<td><img src="image/female.jpg"></td>
         				<td>
-        					<table>
+        					<table class="pi">
         						<tr>
         							<td>姓名：</td>
         							<td><%=username %></td>
@@ -309,7 +357,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         						</tr>
         						<tr>
         							<td>身份：</td>
-        							<td><%=type %></td>
+        							<td>作家</td>
         						</tr>
         						<tr>
         							<td>等级：</td>
@@ -328,18 +376,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         				</td>
         			</tr>
         		</table>
+        		
         	</div>
    			<div id="eDiv" class="regContainer" style="display:none;"> 
    				<form id="form1" method="post" action="UpdateInfo">
-   					<table>
+   					<table class="pi">
    						<tr>
    							<td>姓名：</td>
-   							<td><input type="text" value="<%=username %>" name="username" id="username"></td>
+   							<td><input type="text" value="<%=username %>" id="username"></td>
    						</tr>
    						<tr>
    							<td>性别：</td>
-   							<td><input type="radio" id="sexmale" name="sex" value="male">男&nbsp;
-    							<input type="radio" id="sexfemale" name="sex" value="female" checked>女
+   							<td><input type="radio" id="sexmale" name="usersex" value="male">男&nbsp;
+    							<input type="radio" id="sexfemale" name="usersex" value="female" checked>女
     						</td>
     					</tr>
     					<tr>
@@ -349,11 +398,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					<tr>
     						<td>确认信密码：</td>
     						<td><input type="password" name="password" id="password" value="<%=password %>" /></td>
-    						<td><input type="hidden" name="userid" id="userid" value="<%=userID %>"></td>
     					</tr>
     					
    					</table>
-   					<div>
+   					<div id="submit">
     						<button type="submit" onclick="checkform(this.form)" style="background:#fff0ac">提交修改</button>
     				</div>
    				</form>
@@ -374,19 +422,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</thead>
 					<tbody>
 					<%	SpendDAO spdlist = new SpendDAO();
-      					ArrayList<Spend> list = spdlist.select(userID.intValue());
-      					if(list.size()!=0)
-      					{
-      					for(int i=0;i<list.size();i++){
+      					ArrayList<Spend> list2 = spdlist.select(userID);
+      					if(list2.size()!=0){
+      					for(int i=0;i<list2.size();i++){
       						String name;
-      						if(list.get(i).getBid()==0 && list.get(i).getCid()==0)
+      						if(list2.get(i).getBid()==0 && list2.get(i).getCid()==0)
       							name=new String("充值");
       						else
       							name=new String("消费");
       				%>
     					<tr>
     						<td><%=name %></td>
-    						<td><%=list.get(i).getCost()%></td>
+    						<td><%=list2.get(i).getCost()%></td>
     					</tr>
     				<%}} %>
     				</tbody>
@@ -398,47 +445,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			<div id="fDiv" class="regContainer" style="display:none;">
    				<center>
    				<table id="booklist">
-   					<%	SpendDAO b = new SpendDAO();
+   					<tr>
+   						<td>书名</td>
+   						<td>作家</td>
+   						<td>简介</td>
+   					<%	SpendDAO s = new SpendDAO();
    						WriterDAO w = new WriterDAO();
-   						ArrayList<Books> list2=b.bookhouse(userID);
-   						if(list2!=null)
-   						{
-   						for(int i=0;i<list2.size();i++)
+   						ArrayList<Books> list3=s.bookhouse(userID);
+   						if(list3!=null){
+   						for(int i=0;i<list3.size();i++)
    						{ %>
 		   					<tr>
-		   						<td>书名:<a href="BookPage?userid=<%=userID%>&bid=<%=list2.get(i).getBid()%>"><%=list2.get(i).getBname() %></a></td>
-		   						<td>作家:<a href="PersonalPage?userid=<%=userID %>&wid=<%=list2.get(i).getWid() %>"><%=w.select(list2.get(i).getWid()).getWname()%></a></td>
-		   						<td>简介:<p><%=list2.get(i).getBintro() %></td>
+		   						<td><a href="BookPage?userid=<%=userID%>&bid=<%=list3.get(i).getBid()%>"><%=list3.get(i).getBname() %></a></td>
+		   						<td><a href="visitwriter?userID=<%=userID %>&wid=<%=list3.get(i).getWid() %>"><%=w.select(list3.get(i).getWid()).getWname()%></a></td>
+		   						<td><p><%=list3.get(i).getBintro() %></td>
 		   					</tr>
-		   				<%} 
-		   				}%>
+		   				<%}} %>
    					
    				</table>
    				</center> 
    			</div>
+   			
+   			
    			<div id="mDiv" class="regContainer" style="display:none;">
    				<center>
-   					<table id="mlist">
+   					<table id="mlist" class="pi">
    						<tr>
    							<td>发布时间</td>
    							<td>内容</td>
    						</tr>
    						<%	InformingDAO inf= new InformingDAO();
-   							ArrayList<Informing> list3 = inf.selecttype(1);
-   							if(list3.size()!=0)
+   							ArrayList<Informing> list5 = inf.selecttype(1);
+   							if(list5.size()!=0)
    							{
-   								for(int i=0;i<list3.size();i++)
+   								for(int j=0;j<list5.size();j++)
    								{
    						 %>
    						 	<tr>
-   						 		<td><%=list3.get(i).getTime() %></td>
-   						 		<td><%=list3.get(i).getReason() %></td>
+   						 		<td><%=list5.get(j).getTime() %></td>
+   						 		<td><%=list5.get(j).getReason() %></td>
    						 	</tr>
    						 <%}} %>	
    					</table>
    				</center>
    			</div>
    		 </div>
-  	</div>
+  	</div>  
   </body>
 </html>

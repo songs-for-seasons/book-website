@@ -83,7 +83,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				alert("您的余额不足！！！请充值");
 				return(false);
 			}
-		}
+		};
+		function check()
+		{
+			alert("check!!!");
+			var list = document.getElementsByName("cid");
+			
+			for(var i=0;i<list.length;i++)
+			{
+				if(list.item(i).checked)
+					return true;
+			}
+			alert("请选择一个章节后再点击确定！！！");
+			return false;
+		};
 	</script>
 	
   </head>
@@ -118,7 +131,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   				<tr>
   					<td><a href="help.jsp">新手导航</a></td>
-  					<td><a href="">个人书屋</a></td>
   					<td><a href="charge.jsp?uid=<%=userID%>">充值</a></td>
   				</tr>
   			</table>
@@ -200,7 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 	</tr>
 					 <%} %>
 				
-				<tr><td colspan=8><input type="submit" value="确认购买"></td></tr>	
+				<tr><td colspan=8><input type="submit" value="确认购买" onclick="check();return false;"></td></tr>	
 			</table>	
 		</form>	
 		

@@ -83,7 +83,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   				<tr>
   					<td><a href="help.jsp">新手导航</a></td>
-  					<td><a href="">个人书屋</a></td>
   					<td><a href="charge.jsp?uid=<%=userID%>">充值</a></td>
   				</tr>
   			</table>
@@ -151,8 +150,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         						</tr>
         						<% BooksDAO b = new BooksDAO();
         							ArrayList<Books> list= b.selectid(wID);
-        							System.out.println("size:");
-        							System.out.println(list.size());
         							for(int i=0;i<list.size();i++)
         							{
         						 %>

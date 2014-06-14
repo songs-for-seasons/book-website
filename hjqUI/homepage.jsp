@@ -108,8 +108,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <%
   	session=request.getSession();
   	Integer userID=(Integer)(session.getAttribute("userid"));
+  	if(userID==null) {
+  		userID=0;
+  	}
   	//String userID=(String)(session.getAttribute("userID"));
-  	String username=(String)(session.getAttribute("username"));	
+  	String username=(String)(session.getAttribute("username"));
+  	if(username==null)
+  		username="";	
    %>
    
    <script type="text/javascript">
@@ -120,9 +125,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	function change()
   	{
   		
-   		if(<%=userID%>==null)
+   		if(<%=userID%>==0)
    		{
-   			
    			document.getElementById("info2").style.display='block';
    			document.getElementById("info1").style.display='none';
    		}
@@ -149,7 +153,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   				<tr>
   					<td><a href="help.jsp">新手导航</a></td>
-  					<td><a href="">个人书屋</a></td>
   					<td><a href="charge.jsp?uid=<%=userID%>">充值</a></td>
   				</tr>
   			</table>
@@ -184,9 +187,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<%	for(int i=0;i<5;i++)
   				{%>
   					<li>	
-  					<table>
+  					<table width="500px" height="300px">
   						<tr>
-  							<td><a href="bhomepage.jsp?username=<%=username%>&bid=<%=list.get(i).getBid()%>"><img src="image/<%=list.get(i).getType() %>.jpg" height=150px></a></td>
+  							<td><a href="BookPage?userid=<%=userID%>&bid=<%=list.get(i).getBid()%>"><img src="image/<%=list.get(i).getType() %>.jpg" height=150px></a></td>
   							<td>
   							<table>
   								<tr>
@@ -214,7 +217,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<table id="search" >
   			<tr>
  				<td><h2>搜索：</h2></td>
-  				<td><input type="text"></td>
+  				<td><input type="hidden" name="userid" value="<%=userID %>"><input type="text" name="bookname"></td>
+  				
   				<td><input type="image" src="image/search.gif" onClick="fsubmit(form1)" height="40px"></td>
   			</tr>
   		</table>
@@ -224,6 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<fieldset>
   		<legend>个性推荐</legend>
   		<table width="850px">
+  			<tr>
   			<%	SpendDAO s = new SpendDAO();
    						WriterDAO wrd = new WriterDAO();
    						ArrayList<Books> list4=s.bookhouse(userID);
@@ -232,7 +237,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    						
    						for(int i=0;i<java.lang.Math.min(5,list4.size());i++)
    						{ %>
-		   					<tr>
+		   					
 		   						<td>
 		   							<table>
 		   								<tr>
@@ -243,9 +248,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		   								</tr>
 		   							</table>
 		   						</td>
-		   					</tr>
+		   					
 		   				<%} 
 		   				}%>
+		   	</tr>
   		</table>
   		</fieldset>
   	</div>

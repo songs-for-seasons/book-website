@@ -124,7 +124,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</tr>
   				<tr>
   					<td><a href="help.jsp">新手导航</a></td>
-  					<td><a href="">个人书屋</a></td>
   					<td><a href="charge.jsp?uid=<%=userID%>">充值</a></td>
   				</tr>
   			</table>
@@ -171,8 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   						<input type="hidden" value="<%=userID %>" name="userid"></td>
   					<%InformingDAO in = new InformingDAO();
   					int s=in.isInform(userID, bID);
-  					System.out.println("-------------------------");
-  					System.out.println("--"+s); %>
+  					%>
   					<td><input type="submit" value="举报该章节" onclick="check('<%=s%>','<%=wID%>','<%=userID%>')"></td>
   				</tr> 
   						
@@ -203,7 +201,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   						<input type="hidden" name="cid" value="<%=cID %>"></td>
   				</tr>
   				<tr>
-  					<td colspan=2 align="center"><input type="submit" value="提交评论" onclick="check1('<%=userID%>,<%=wID%>')"></td>
+  					<td colspan=2 align="center"><input type="submit" value="提交评论" onclick="check1('<%=userID%>','<%=wID%>')"></td>
   				</tr>
   			</table>
   		</form>
